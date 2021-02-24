@@ -4,6 +4,8 @@
             <div class="header-wrap">
                 <form class="form-header"></form>
                 <div class="header-button">
+                <div class="noti__item js-item-menu">                                        
+                </div>
                     <div class="account-wrap">
                         <div class="account-item clearfix js-item-menu">
                             <div class="image">
