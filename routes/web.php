@@ -18,7 +18,7 @@ Route::post('/', 'AuthController@login')->name('login');
 
 Route::group(['middleware' => 'auth'], function () {
     //Dashboard
-    Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
     //CRUD
     Route::resource('user', 'UserController');

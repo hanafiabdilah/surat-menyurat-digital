@@ -25,7 +25,7 @@ class TransaksiSuratController extends Controller
      */
     public function create()
     {
-        //
+        return view('transaksi_surat.create');
     }
 
     /**

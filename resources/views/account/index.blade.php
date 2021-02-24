@@ -31,6 +31,17 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
+                                    <label for="file">Foto</label>
+                                </div>
+                                <div class="col-12 col-md-2">
+                                    <img src="{{ asset('storage/userfoto') }}/{{ $user->foto }}" id="previewImg" width="100px">
+                                </div>
+                                <div class="col-12 col-md-7 p-3">
+                                    <input type="file" id="file" name="file" class="form-control-file" accept=".svg, .jpg, .jpeg, .png" onchange="previewFile(this)">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
                                     <label for="nama">Nama</label>
                                 </div>
                                 <div class="col-12 col-md-9">
@@ -43,17 +54,6 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <input type="email" id="email" name="email" class="form-control" value="{{ $user->email }}" required>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="file">Foto</label>
-                                </div>
-                                <div class="col-12 col-md-2">
-                                    <img src="{{ asset('storage/userfoto') }}/{{ $user->foto }}" id="previewImg" width="100px">
-                                </div>
-                                <div class="col-12 col-md-7 p-3">
-                                    <input type="file" id="file" name="file" class="form-control-file" accept=".svg, .jpg, .jpeg, .png" onchange="previewFile(this)">
                                 </div>
                             </div>
                         </div>
