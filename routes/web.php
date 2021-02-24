@@ -18,13 +18,21 @@ Route::post('/', 'AuthController@login')->name('login');
 
 Route::group(['middleware' => 'auth'], function () {
     //Dashboard
-    Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
     //CRUD
     Route::resource('user', 'UserController');
     Route::resource('klasifikasi', 'KlasifikasiController');
     Route::resource('sifatsurat', 'SifatSuratController');
     Route::resource('transaksisurat', 'TransaksiSuratController');
+
+    //Account
+    Route::get('/account', 'AccountController@index')->name('account');
+    Route::post('/account', 'AccountController@update')->name('account.update');
+
+    //Ubah Password
+    Route::get('/password', 'AccountController@password')->name('password');
+    Route::post('/password', 'AccountController@updatePassword')->name('password.update');
 
     //Logout
     Route::get('logout', 'AuthController@logout')->name('logout');

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Klasifikasi;
+use App\User;
 
 class KlasifikasiController extends Controller
 {
@@ -14,7 +16,8 @@ class KlasifikasiController extends Controller
      */
     public function index()
     {
-        $klasifikasi = Klasifikasi::all();
+        $klasifikasis = Klasifikasi::all();
+        return view('klasifikasi.index', compact('klasifikasis'));
     }
 
     /**
@@ -24,7 +27,7 @@ class KlasifikasiController extends Controller
      */
     public function create()
     {
-        //
+        return view('klasifikasi.create');
     }
 
     /**
@@ -35,7 +38,8 @@ class KlasifikasiController extends Controller
      */
     public function store(Request $request)
     {
-        $request->request->add(['created_by' => 'admin', 'updated_by' => '']);
+        $request['created_by'] = Auth::user()->id;
+        $request['updated_by'] = Auth::user()->id;
         Klasifikasi::create($request->all());
         return back()->with('message', 'Klasifikasi berhasil ditambahkan');
     }

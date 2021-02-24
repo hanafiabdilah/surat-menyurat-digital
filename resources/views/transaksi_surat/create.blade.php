@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends('layouts.app')
 
 @section('title', 'Transaksi Surat | Tambah ')
@@ -135,3 +136,6 @@
                      </div>
     </div>
 @endsection
+=======
+@extends('layouts.app')
+>>>>>>> 8a642119028e670fa34692a250b68bc305e7337d

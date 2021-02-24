@@ -82,14 +82,34 @@
     <script src="{{ asset('vendor/counter-up/jquery.waypoints.min.js') }}"></script>
     <script src="{{ asset('vendor/counter-up/jquery.counterup.min.js') }}">
     </script>
+<<<<<<< HEAD
     <script src="{{ asset('vendor/circle-progress/circle-progress.min.js') }}"></script>
     <script src="{{ asset('vendor/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
     <script src="{{ asset('vendor/chartjs/Chart.bundle.min.js') }}"></script>
     <script src="{{ asset('vendor/select2/select2.min.js') }}">
     </script>
+=======
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js"></script>
+>>>>>>> 8a642119028e670fa34692a250b68bc305e7337d
 
     <!-- Main JS-->
     <script src="{{ asset('js/main.js') }}"></script>
+
+    <script>
+        function previewFile(input) {
+        var file = $("input[type=file]").get(0).files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                $('#previewImg').attr("src", reader.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+    </script>
 
     @yield('script')
 
