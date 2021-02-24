@@ -13,11 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'AuthController@index')->name('login');
+Route::post('/', 'AuthController@login')->name('login');
 
-Route::resource('user', 'UserController');
-Route::resource('klasifikasi', 'KlasifikasiController');
-Route::resource('sifatsurat', 'SifatSuratController');
-Route::resource('transaksisurat', 'TransaksiSuratController');
+Route::group(['middleware' => 'auth'], function () {
+    //Dashboard
+    Route::get('/dashboard', 'DashboardController@index');
+
+    //CRUD
+    Route::resource('user', 'UserController');
+    Route::resource('klasifikasi', 'KlasifikasiController');
+    Route::resource('sifatsurat', 'SifatSuratController');
+    Route::resource('transaksisurat', 'TransaksiSuratController');
+
+    //Logout
+    Route::get('logout', 'AuthController@logout')->name('logout');
+});
