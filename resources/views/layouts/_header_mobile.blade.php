@@ -16,13 +16,13 @@
     <nav class="navbar-mobile">
         <div class="container-fluid">
             <ul class="navbar-mobile__list list-unstyled">
-                <li class="has-sub">
-                    <a href="{{ url('user') }}">
+                <li>
+                    <a href="{{ url('dashboard') }}">
                         <i class="fas fa-tachometer-alt"></i>Dashboard</a>                    
                 </li>
                 <li>
-                    <a href="chart.html">
-                        <i class="zmdi zmdi-email"></i>Data Surat</a>
+                    <a href="{{ url('transaksisurat') }}">
+                        <i class="zmdi zmdi-email"></i>Transaksi Surat</a>
                 </li>
                 <li>
                     <a href="table.html">

@@ -7,13 +7,13 @@
     <div class="menu-sidebar__content js-scrollbar1">
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
-                <li class="active has-sub">
-                    <a href="{{ url('user') }}">
+                <li class="{{ request()->is('dashboard') ? 'active' : '' }}">
+                    <a href="{{ url('dashboard') }}">
                         <i class="fas fa-tachometer-alt"></i>Dashboard</a>                    
                 </li>
-                <li>
+                <li  class="{{ request()->is('transaksisurat') ? 'active' : '' }}">
                     <a  href="{{ url('transaksisurat') }}">
-                        <i class="zmdi zmdi-email"></i>Data Surat</a>                        
+                        <i class="zmdi zmdi-email"></i>Transaksi Surat</a>                        
                 </li>
                 <li>
                     <a href="table.html">

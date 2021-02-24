@@ -15,7 +15,7 @@ class TransaksiSuratController extends Controller
     public function index()
     {
         $transaksiSurats = TransaksiSurat::all();
-        return view('dashboard.mail',compact('transaksiSurats'));
+        return view('transaksi_surat.index', compact('transaksiSurats'));
     }
 
     /**
