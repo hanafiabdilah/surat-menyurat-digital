@@ -15,7 +15,8 @@ class TransaksiSuratController extends Controller
     public function index()
     {
         $transaksiSurats = TransaksiSurat::all();
-        return view('transaksi_surat.index', compact('transaksiSurats'));
+        $countTransaksi = TransaksiSurat::count();
+        return view('transaksi_surat.index', compact('transaksiSurats','countTransaksi'));
     }
 
     /**
@@ -25,7 +26,7 @@ class TransaksiSuratController extends Controller
      */
     public function create()
     {
-        //
+        return view('transaksi_surat.create');
     }
 
     /**
