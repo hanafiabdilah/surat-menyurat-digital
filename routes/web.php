@@ -20,3 +20,4 @@ Route::get('/', function () {
 Route::resource('user', 'UserController');
 Route::resource('klasifikasi', 'KlasifikasiController');
 Route::resource('sifatsurat', 'SifatSuratController');
+Route::resource('transaksisurat', 'TransaksiSuratController');

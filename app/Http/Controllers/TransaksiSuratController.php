@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\SifatSurat;
+use App\TransaksiSurat;
 
-class SifatSuratController extends Controller
+class TransaksiSuratController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SifatSuratController extends Controller
      */
     public function index()
     {
-        $sifatSurat = SifatSurat::all();
+        $transaksiSurats = TransaksiSurat::all();
     }
 
     /**
@@ -35,9 +35,9 @@ class SifatSuratController extends Controller
      */
     public function store(Request $request)
     {
-        $request->request->add(['created_by' => 'admin', ['updated_by'] => '']);
-        SifatSurat::create($request->all());
-        return back()->with('message', 'Sifat Surat berhasil ditambahkan');
+        $request->request->add(['created_by' => 'admin', 'updated_by' => '']);
+        TransaksiSurat::create($request->all());
+        return back()->with('message', 'Surat berhasil ditambahkan');
     }
 
     /**
@@ -48,7 +48,7 @@ class SifatSuratController extends Controller
      */
     public function show($id)
     {
-        $sifatSurat = SifatSurat::find($id);
+        $transaksiSurat = TransaksiSurat::find($id);
     }
 
     /**
@@ -59,7 +59,7 @@ class SifatSuratController extends Controller
      */
     public function edit($id)
     {
-        $sifatSurat = SifatSurat::find($id);
+        $transaksiSurat = TransaksiSurat::find($id);
     }
 
     /**
@@ -71,10 +71,10 @@ class SifatSuratController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sifatSurat = SifatSurat::find($id);
+        $transaksiSurat = TransaksiSurat::find($id);
         $request->request->add(['updated_by' => 'admin']);
-        $sifatSurat->update($request->all());
-        return back()->with('message', 'Sifat Surat berhasil diupdate');
+        $transaksiSurat->update($request->all());
+        return back()->with('message', 'Surat berhasil update');
     }
 
     /**
@@ -85,8 +85,8 @@ class SifatSuratController extends Controller
      */
     public function destroy($id)
     {
-        $sifatSurat = SifatSurat::find($id);
-        $sifatSurat->delete();
-        return back()->with('message', 'Sifat Surat berhasil dihapus');
+        $transaksiSurat = TransaksiSurat::find($id);
+        $transaksiSurat->delete();
+        return back()->with('message', 'Surat berhasil dihapus');
     }
 }
