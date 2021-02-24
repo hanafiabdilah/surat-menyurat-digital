@@ -8,26 +8,12 @@
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
                 <li class="active has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                    <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li>
-                            <a href="index.html">Dashboard 1</a>
-                        </li>
-                        <li>
-                            <a href="index2.html">Dashboard 2</a>
-                        </li>
-                        <li>
-                            <a href="index3.html">Dashboard 3</a>
-                        </li>
-                        <li>
-                            <a href="index4.html">Dashboard 4</a>
-                        </li>
-                    </ul>
+                    <a href="{{ url('user') }}">
+                        <i class="fas fa-tachometer-alt"></i>Dashboard</a>                    
                 </li>
                 <li>
-                    <a href="chart.html">
-                        <i class="fas fa-chart-bar"></i>Charts</a>
+                    <a  href="{{ url('transaksisurat') }}">
+                        <i class="zmdi zmdi-email"></i>Data Surat</a>                        
                 </li>
                 <li>
                     <a href="table.html">
