@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use App\User;
+use App\Klasifikasi;
 
-class UserController extends Controller
+class KlasifikasiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('role', 'staff')->get();
+        $klasifikasi = Klasifikasi::all();
     }
 
     /**
@@ -36,14 +35,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $cekUsername = User::where('username', $request->username)->count();
-        if ($cekUsername < 1) {
-            $request->request->add(['created_by' => 'admin']);
-            $request['password'] = Hash::make($request->password);
-            User::create($request->all());
-            return back()->with('message', 'User berhasil ditambahkan');
-        }
-        return back()->with('message', 'Username sudah digunakan');
+        $request->request->add(['created_by' => 'admin', 'updated_by' => '']);
+        Klasifikasi::create($request->all());
+        return back()->with('message', 'Klasifikasi berhasil ditambahkan');
     }
 
     /**
@@ -54,7 +48,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        $klasifikasi = Klasifikasi::find($id);
     }
 
     /**
@@ -65,8 +59,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        return view('tes', ['user' => $user]);
+        $klasifikasi = Klasifikasi::find($id);
     }
 
     /**
@@ -78,14 +71,10 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $cekUsername = User::where('username', $request->username)->count();
-        if ($cekUsername < 1) {
-            $request['password'] = Hash::make($request->password);
-            $user->update($request->all());
-            return back()->with('message', 'User berhasil diupdate');
-        }
-        return back()->with('message', 'Username sudah digunakan');
+        $klasifikasi = Klasifikasi::find($id);
+        $request->request->add(['updated_by' => 'admin']);
+        $klasifikasi->update($request->all());
+        return back()->with('message', 'Klasifikasi berhasil diupdate');
     }
 
     /**
@@ -96,8 +85,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
-        return back()->with('message', 'User berhasil dihapus');
+        $klasifikasi = Klasifikasi::find($id);
+        $klasifikasi->delete();
+        return back()->with('message', 'Klasifikasi berhasil dihapus');
     }
 }
