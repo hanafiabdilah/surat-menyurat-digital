@@ -30,6 +30,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/account', 'AccountController@index')->name('account');
     Route::post('/account', 'AccountController@update')->name('account.update');
 
+    //Ubah Password
+    Route::get('/password', 'AccountController@password')->name('password');
+    Route::post('/password', 'AccountController@updatePassword')->name('password.update');
+
     //Logout
     Route::get('logout', 'AuthController@logout')->name('logout');
 });

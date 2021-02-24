@@ -5,7 +5,7 @@
 @section('body')
     <div class="row">
         <div class="col-lg-12">
-            <div class="au-card recent-report">
+            <div class="au-card">
                 <div class="au-card-inner">
                     <div class="au-card-header">
                         <h3 class="title-2">Account</h3>

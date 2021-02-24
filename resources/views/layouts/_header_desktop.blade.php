@@ -33,6 +33,10 @@
                                         <a href="{{ route('account') }}">
                                             <i class="zmdi zmdi-account"></i>Account</a>
                                     </div>
+                                    <div class="account-dropdown__item">
+                                        <a href="{{ route('password') }}">
+                                            <i class="zmdi zmdi-key"></i>Ubah Password</a>
+                                    </div>
                                 </div>
                                 <div class="account-dropdown__footer">
                                     <a href="{{ route('logout') }}">
