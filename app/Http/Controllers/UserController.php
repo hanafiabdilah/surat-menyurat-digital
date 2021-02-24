@@ -16,6 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::where('role', 'staff')->get();
+        return view('layouts.master',compact('users'));
     }
 
     /**
