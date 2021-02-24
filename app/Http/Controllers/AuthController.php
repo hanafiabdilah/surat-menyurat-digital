@@ -18,9 +18,9 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            return redirect('/dashboard');
+            return redirect('/dashboard')->with('success', __('Selamat datang :nama', ['nama' => ucfirst(Auth::user()->nama)]));
         };
-        return redirect('/')->with('message', 'Username dan/atau Password Salah');
+        return redirect('/')->with('error', 'Username dan/atau Password Salah');
     }
 
     public function logout(Request $reqeust)
