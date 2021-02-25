@@ -20,10 +20,10 @@
                         <div class="au-card-body mt-3 mb-3">
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">No. Agenda</label>
+                                    <label for="no_agenda" class=" form-control-label">No. Agenda</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="number" name="no_agenda" class="form-control @error('no_agenda') is-invalid @enderror" value="{{ $transaksiSurat->no_agenda }}">
+                                    <input id="no_agenda" type="number" name="no_agenda" class="form-control @error('no_agenda') is-invalid @enderror" value="{{ $transaksiSurat->no_agenda }}">
                                     @error('no_agenda')
                                     <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -32,10 +32,10 @@
 
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">No. Surat</label>
+                                    <label for="no_surat" class=" form-control-label">No. Surat</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="text" name="no_surat" class="form-control @error('no_surat') is-invalid @enderror" value="{{ $transaksiSurat->no_surat }}">
+                                    <input id="no_surat" type="text" name="no_surat" class="form-control @error('no_surat') is-invalid @enderror" value="{{ $transaksiSurat->no_surat }}">
                                     @error('no_surat')
                                     <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -44,10 +44,10 @@
 
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Pengirim</label>
+                                    <label for="pengirim" class=" form-control-label">Pengirim</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="text" name="pengirim" class="form-control @error('pengirim') is-invalid @enderror" value="{{ $transaksiSurat->pengirim }}">
+                                    <input id="pengirim" type="text" name="pengirim" class="form-control @error('pengirim') is-invalid @enderror" value="{{ $transaksiSurat->pengirim }}">
                                     @error('pengirim')
                                     <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -56,10 +56,10 @@
 
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="textarea-input" class=" form-control-label">Isi Ringkas</label>
+                                    <label for="isi_ringkas" class=" form-control-label">Isi Ringkas</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <textarea name="isi_ringkas" rows="7" class="form-control @error('isi_ringkas') is-invalid @enderror">{{ $transaksiSurat->isi_ringkas }}</textarea>
+                                    <textarea id="isi_ringkas" name="isi_ringkas" rows="7" class="form-control @error('isi_ringkas') is-invalid @enderror">{{ $transaksiSurat->isi_ringkas }}</textarea>
                                     @error('isi_ringkas')
                                     <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -69,10 +69,10 @@
 
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Tanggal Surat</label>
+                                    <label for="tanggal_surat" class=" form-control-label">Tanggal Surat</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="date" name="tanggal_surat" class="form-control @error('tanggal_surat') is-invalid @enderror" value="{{ $transaksiSurat->tanggal_surat->format('Y-m-d') }}">
+                                    <input id="tanggal_surat" type="date" name="tanggal_surat" class="form-control @error('tanggal_surat') is-invalid @enderror" value="{{ $transaksiSurat->tanggal_surat->format('Y-m-d') }}">
                                     @error('tanggal_surat')
                                     <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -80,9 +80,9 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Tanggal Diterima</label>
+                                    <label for="tanggal_diterima" class=" form-control-label">Tanggal Diterima</label>
                                 </div>
-                                <div class="col-12 col-md-9">
+                                <div id="tanggal_diterima" class="col-12 col-md-9">
                                     <input type="date" name="tanggal_diterima" class="form-control @error('tanggal_diterima') is-invalid @enderror" value="{{ $transaksiSurat->tanggal_diterima->format('Y-m-d') }}">
                                     @error('tanggal_diterima')
                                     <small class="form-text text-danger">{{ $message }}</small>
@@ -92,10 +92,10 @@
 
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label" disabled>Keterangan</label>
+                                    <label for="keterangan" class=" form-control-label" disabled>Keterangan</label>
                                     <small>- <i>Optional</i></small>
                                 </div>
-                                <div class="col-12 col-md-9">
+                                <div id="keterangan" class="col-12 col-md-9">
                                     <textarea type="text" rows="5" name="keterangan" class="form-control">{{ $transaksiSurat->keterangan }}</textarea>
                                     @error('keterangan')
                                     <small class="form-text text-danger">{{ $message }}</small>
@@ -117,7 +117,7 @@
                             </div>                                                                                                                                                                                                                           
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="file" class=" form-control-label">File</label>
+                                    <label for="upload" class=" form-control-label">File</label>
                                     <small>- <i>Optional</i></small>
                                 </div>
                                 <div class="col-12 col-md-9">

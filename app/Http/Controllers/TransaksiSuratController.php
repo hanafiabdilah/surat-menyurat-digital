@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\TransaksiSurat;
+use App\Disposisi;
 use File;
 
 class TransaksiSuratController extends Controller
@@ -17,8 +18,7 @@ class TransaksiSuratController extends Controller
     public function index()
     {
         $transaksiSurats = TransaksiSurat::orderBy('created_at', 'DESC')->get();
-        $countTransaksi = TransaksiSurat::count();
-        return view('transaksi_surat.index', compact('transaksiSurats', 'countTransaksi'));
+        return view('transaksi_surat.index', compact('transaksiSurats'));
     }
 
     /**

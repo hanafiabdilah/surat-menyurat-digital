@@ -12,6 +12,11 @@ class TransaksiSurat extends Model
 
     public $dates = ['tanggal_surat', 'tanggal_diterima'];
 
+    public function disposisi()
+    {
+        return $this->hasMany(TransaksiSurat::class);
+    }
+
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');

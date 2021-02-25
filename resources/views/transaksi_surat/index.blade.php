@@ -30,7 +30,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($countTransaksi > 0)
+                                    @if($transaksiSurats->count() > 0)
                                         @foreach($transaksiSurats as $t)
                                             <tr>                                                
                                                 <td style="vertical-align: middle">{{ $t->no_agenda }}</td>
@@ -44,7 +44,7 @@
                                                             <i class="zmdi zmdi-more"></i>
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="">Disposisi</a>
+                                                            <a class="dropdown-item" href="{{ route('disposisi.index', $t->id) }}">Disposisi</a>
                                                             <a class="dropdown-item" href="{{ route('transaksisurat.show', $t->id) }}">Detail</a>
                                                             <a class="dropdown-item" href="{{ route('transaksisurat.edit', $t->id) }}">Edit</a>
                                                             <form action="{{ route('transaksisurat.destroy', $t->id ) }}" method="post">
@@ -53,7 +53,7 @@
                                                                 <button type="submit" class="dropdown-item">Hapus</button>
                                                             </form>
                                                         </div>
-                                                      </div>
+                                                    </div>
                                                 </td>
                                             </tr>                          
                                         @endforeach

@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('klasifikasi', 'KlasifikasiController');
     Route::resource('sifatsurat', 'SifatSuratController');
     Route::resource('transaksisurat', 'TransaksiSuratController');
+    Route::resource('/transaksisurat/{id_surat}/disposisi', 'DisposisiController');
+
     Route::get('/transaksisurat/download/{file}', 'TransaksiSuratController@downloadFile')->name('downloadFile');
 
     //Account
