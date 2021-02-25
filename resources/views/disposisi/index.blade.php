@@ -20,6 +20,62 @@
                             <i class="zmdi zmdi-plus"></i> Tambah</a>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label class="form-control-label">No. Agenda</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input  class="form-control" value="{{ $transaksiSurat->no_agenda }}" disabled>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label class="form-control-label">No. Surat</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input  class="form-control" value="{{ $transaksiSurat->no_surat }}" disabled>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label class="form-control-label">Pengirim</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input  class="form-control" value="{{ $transaksiSurat->pengirim }}" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label class="form-control-label">Kategori</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    @if($transaksiSurat->kategori == 'in')
+                                        <input class="form-control" value="Surat Masuk" disabled>
+                                    @else 
+                                        <input class="form-control" value="Surat Keluar" disabled>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="file" class=" form-control-label">File</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    @if($transaksiSurat->file)
+                                        <label>{{ $transaksiSurat->file }}</label> |
+                                        <a href="{{ asset('storage/surat') }}/{{ $transaksiSurat->file}}" target="_blank">View</a> |
+                                        <a href="{{ route('downloadFile', $transaksiSurat->file) }}" target="_blank">Download</a>
+                                    @else 
+                                        <label>Tidak Ada File</label>
+                                    @endif
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
                     <div class="table-responsive table--no-card m-b-30">
                         <table class="table table-borderless table-striped text-center">
                             <thead class="bg-info">

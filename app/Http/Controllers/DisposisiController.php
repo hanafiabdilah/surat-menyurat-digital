@@ -18,7 +18,8 @@ class DisposisiController extends Controller
     public function index($id_surat)
     {
         $disposisis = Disposisi::where('id_transaksi_surat', $id_surat)->orderBy('created_at', 'DESC')->get();
-        return view('disposisi.index', compact('disposisis', 'id_surat'));
+        $transaksiSurat = TransaksiSurat::where('id', $id_surat)->first();
+        return view('disposisi.index', compact('disposisis', 'id_surat', 'transaksiSurat'));
     }
 
     /**
