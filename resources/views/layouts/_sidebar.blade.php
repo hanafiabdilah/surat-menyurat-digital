@@ -11,11 +11,11 @@
                     <a href="{{ route('dashboard') }}">
                         <i class="fas fa-tachometer-alt"></i>Dashboard</a>                    
                 </li>
-                <li  class="{{ request()->is('transaksisurat') ? 'active' : '' }}">
+                <li  class="{{ request()->is('transaksisurat') ? 'active' : '' }}{{ request()->is('transaksisurat/*') ? 'active' : '' }}">
                     <a  href="{{ route('transaksisurat.index') }}">
                         <i class="zmdi zmdi-email"></i>Transaksi Surat</a>                        
                 </li>
-                <li class="{{ request()->is('klasifikasi') ? 'active' : '' }}">
+                <li class="{{ request()->is('klasifikasi') ? 'active' : '' }}{{ request()->is('klasifikasi/*') ? 'active' : '' }}">
                     <a href="{{ route('klasifikasi.index') }}">
                         <i class="fas fa-user"></i>Klasifikasi</a>
                 </li>

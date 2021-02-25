@@ -9,11 +9,7 @@
                     <div class="account-wrap">
                         <div class="account-item clearfix js-item-menu">
                             <div class="image">
-<<<<<<< HEAD
-                                <img src="{{ asset('images/icon/avatar-01.jpg') }}" alt="{{ Auth::user()->nama }}" />
-=======
                                 <img src="{{ asset('storage/userfoto') }}/{{ Auth::user()->foto }}" alt="{{ Auth::user()->nama }}" />
->>>>>>> 8a642119028e670fa34692a250b68bc305e7337d
                             </div>
                             <div class="content">
                                 <a class="js-acc-btn" href="#">{{ Auth::user()->nama }}</a>
@@ -22,11 +18,7 @@
                                 <div class="info clearfix">
                                     <div class="image">
                                         <a href="#">
-<<<<<<< HEAD
-                                            <img src="{{ asset('images/icon/avatar-01.jpg') }}" alt="{{ Auth::user()->nama }}" />
-=======
                                             <img src="{{ asset('storage/userfoto')}}/{{ Auth::user()->foto }}" alt="{{ Auth::user()->nama }}" />
->>>>>>> 8a642119028e670fa34692a250b68bc305e7337d
                                         </a>
                                     </div>
                                     <div class="content">

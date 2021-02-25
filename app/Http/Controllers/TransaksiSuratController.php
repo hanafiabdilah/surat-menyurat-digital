@@ -14,9 +14,9 @@ class TransaksiSuratController extends Controller
      */
     public function index()
     {
-        $transaksiSurats = TransaksiSurat::all();
+        $transaksiSurats = TransaksiSurat::orderBy('created_at', 'DESC')->get();
         $countTransaksi = TransaksiSurat::count();
-        return view('transaksi_surat.index', compact('transaksiSurats','countTransaksi'));
+        return view('transaksi_surat.index', compact('transaksiSurats', 'countTransaksi'));
     }
 
     /**
@@ -37,9 +37,33 @@ class TransaksiSuratController extends Controller
      */
     public function store(Request $request)
     {
-        $request->request->add(['created_by' => 'admin', 'updated_by' => '']);
-        TransaksiSurat::create($request->all());
-        return back()->with('message', 'Surat berhasil ditambahkan');
+        $messages = [
+            'required' => 'Tidak boleh kosong',
+            'max' => 'Tidak boleh melebihi :max karakter',
+        ];
+        $this->validate($request, [
+            'no_agenda' => 'required|max:50',
+            'no_surat' => 'required',
+            'pengirim' => 'required',
+            'isi_ringkas' => 'required|max:255',
+            'tanggal_surat' => 'required',
+            'tanggal_diterima' => 'required',
+            'kategori' => 'required',
+            'keterangan' => 'max:255',
+            'file' => 'max:2048',
+        ], $messages);
+
+        $cekNoAgenda = TransaksiSurat::where('no_agenda', $request->no_agenda)->count();
+        $cekNoSurat = TransaksiSurat::where('no_surat', $request->no_surat)->count();
+        if ($cekNoAgenda < 1) {
+            if ($cekNoSurat < 1) {
+                $request->request->add(['created_by' => 'admin', 'updated_by' => '']);
+                TransaksiSurat::create($request->all());
+                return redirect(route('transaksisurat.index'))->with('success', 'Surat berhasil ditambahkan');
+            }
+            return back()->with('error', 'No surat sudah ada')->withInput();
+        }
+        return back()->with('error', 'No agenda sudah ada')->withInput();
     }
 
     /**
