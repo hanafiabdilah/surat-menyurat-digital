@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\TransaksiSurat;
 
 class TransaksiSuratController extends Controller
@@ -57,7 +58,7 @@ class TransaksiSuratController extends Controller
         $cekNoSurat = TransaksiSurat::where('no_surat', $request->no_surat)->count();
         if ($cekNoAgenda < 1) {
             if ($cekNoSurat < 1) {
-                $request->request->add(['created_by' => 'admin', 'updated_by' => '']);
+                $request['created_by'] = Auth::user()->id;
                 TransaksiSurat::create($request->all());
                 return redirect(route('transaksisurat.index'))->with('success', 'Surat berhasil ditambahkan');
             }

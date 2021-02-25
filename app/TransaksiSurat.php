@@ -11,4 +11,9 @@ class TransaksiSurat extends Model
     ];
 
     public $dates = ['tanggal_surat'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }
