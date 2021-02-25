@@ -15,7 +15,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+         $users = User::where([
+             ['role','=','Staff']
+         ])->get();
+         $countUser = User::count();
+
+         return view('user.index',compact('users','countUser'));
     }
 
     /**
@@ -25,7 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.create');
     }
 
     /**
@@ -55,6 +60,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+        return view('user.show',compact('user'));
     }
 
     /**
@@ -66,7 +72,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('tes', ['user' => $user]);
+        return view('user.edit', ['user' => $user]);
     }
 
     /**

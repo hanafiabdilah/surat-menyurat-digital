@@ -19,6 +19,11 @@
                     <a href="{{ route('klasifikasi.index') }}">
                         <i class="fas fa-user"></i>Klasifikasi</a>
                 </li>
+                <li class="{{ request()->is('user') ? 'active' : '' }}{{ request()->is('user/*') ? 'active' : '' }}">
+                    <a href="{{ route('user.index') }}">
+                    <i class="zmdi zmdi-account-calendar"></i>User</a>
+                </li>
+                
             </ul>
         </nav>
     </div>
