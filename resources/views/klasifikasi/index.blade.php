@@ -21,7 +21,6 @@
                                         <th class="text-light">No</th>
                                         <th class="text-light">Nama</th>
                                         <th class="text-light">Jabatan</th>
-                                        <th class="text-light">Created By</th>
                                         <th class="text-light">Action</th>
                                     </tr>
                                 </thead>
@@ -32,7 +31,6 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $k->nama }}</td>
                                                 <td>{{ $k->jabatan }}</td>
-                                                <td>{{ $k->createdBy->username ?? 'User sudah dihapus' }}</td>
                                                 <td>
                                                     <div class="dropdown">
                                                         <button class="btn btn-info rounded-circle item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

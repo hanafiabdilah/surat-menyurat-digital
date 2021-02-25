@@ -62,7 +62,7 @@ class TransaksiSuratController extends Controller
                     $request['file'] = $namaFile;
                 }
                 $request['created_by'] = Auth::user()->id;
-                $request['updated_by'] = '';
+                $request['updated_by'] = Auth::user()->id;
                 TransaksiSurat::create($request->all());
                 return redirect(route('transaksisurat.index'))->with('success', 'Surat berhasil ditambahkan');
             }

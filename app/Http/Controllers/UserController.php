@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class UserController extends Controller
@@ -46,7 +47,8 @@ class UserController extends Controller
         ]);
         $cekUsername = User::where('username', $request->username)->count();
         if ($cekUsername < 1) {
-            $request->request->add(['created_by' => 'admin']);
+            $request['created_by'] = Auth::user()->id;
+            $request['updated_by'] = Auth::user()->id;
             $request['password'] = Hash::make($request->password);
             User::create($request->all());
             return redirect(route('user.index'))->with('success', 'User berhasil ditambahkan');
@@ -96,6 +98,7 @@ class UserController extends Controller
             'role' => 'required',
         ]);
         $user = User::find($id);
+        $request['updated_by'] = Auth::user()->id;
         $request['password'] = Hash::make($request->password);
         $user->update($request->all());
         return back()->with('success', 'User berhasil diupdate');
