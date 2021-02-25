@@ -27,7 +27,6 @@
                                         <th class="text-light">Pengirim</th>
                                         <th class="text-light">Tanggal Surat</th>
                                         <th class="text-light">Kategori</th>
-                                        <th class="text-light">Created By</th>
                                         <th class="text-light">Action</th>
                                     </tr>
                                 </thead>
@@ -39,12 +38,6 @@
                                                 <td>{{ $t->no_surat }}</td>
                                                 <td>{{ $t->pengirim }}</td>
                                                 <td>{{ $t->tanggal_surat->format('d-m-Y') }}</td>
-                                                <td class="{{ request()->is($t->kategori == 'in') ? 'text-success' : 'text-danger' }}">{{ request()->is($t->kategori == 'in') ? 'Masuk' : 'Keluar' }}</td>
-                                                @if($t->user)
-                                                    <td>{{ $t->user->username}}</td>
-                                                @else
-                                                    <td class="text-danger">Deleted User</td>
-                                                @endif
                                                 <td>-</td>
                                             </tr>                          
                                         @endforeach

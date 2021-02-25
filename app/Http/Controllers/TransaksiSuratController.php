@@ -59,6 +59,7 @@ class TransaksiSuratController extends Controller
         if ($cekNoAgenda < 1) {
             if ($cekNoSurat < 1) {
                 $request['created_by'] = Auth::user()->id;
+                $request['updated_by'] = '';
                 TransaksiSurat::create($request->all());
                 return redirect(route('transaksisurat.index'))->with('success', 'Surat berhasil ditambahkan');
             }
