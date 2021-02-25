@@ -3,7 +3,6 @@
 @section('title', 'Transaksi Surat')
 
 @section('body')
-<div class="container-fluid">
     <div class="row">                            
         <div class="col-lg-12">
             <div class="au-card">
@@ -18,8 +17,8 @@
                                 <i class="zmdi zmdi-plus"></i>    Tambah</a>
                             </div>
                         </div>
-                        <div class="table-responsive table-responsive-data2">
-                            <table class="table table-data2">
+                        <div class="table-responsive table--no-card m-b-30">
+                            <table class="table table-borderless table-striped text-center">
                                 <thead class="bg-info">
                                     <tr>
                                         <th class="text-light">No. Agenda</th>
@@ -71,5 +70,4 @@
             </div>
         </div>       
     </div>
-</div>
 @endsection

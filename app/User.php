@@ -36,14 +36,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function createdBy()
-    {
-        return $this->hasMany(TransaksiSurat::class);
-    }
-
-    public function updatedBy()
-    {
-        return $this->hasMany(TransaksiSurat::class);
-    }
 }
