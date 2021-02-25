@@ -37,7 +37,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function transaksisurat()
+    public function createdBy()
+    {
+        return $this->hasMany(TransaksiSurat::class);
+    }
+
+    public function updatedBy()
     {
         return $this->hasMany(TransaksiSurat::class);
     }

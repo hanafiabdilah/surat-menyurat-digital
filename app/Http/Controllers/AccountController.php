@@ -26,16 +26,16 @@ class AccountController extends Controller
         $this->validate($request, [
             'nama' => 'max:50|regex:/^[a-zA-Z ]+$/',
             'email' => 'max:50|email',
-            'file' => 'max:2048',
+            'upload' => 'max:2048',
         ], $messages);
         $user = User::where('id', Auth::user()->id)->first();
-        if ($request->file('file')) {
-            $file = $request->file('file');
-            $namaFile = time() . '.' . $file->extension();
-            $oldFile = storage_path(__('app/public/userfoto/:namafile', ['namafile' => $user->foto]));
-            $file->move(storage_path('app/public/userfoto'), $namaFile);
-            File::delete($oldFile);
-            $request['foto'] = $namaFile;
+        if ($request->file('upload')) {
+            $foto = $request->file('upload');
+            $namaFoto = time() . '.' . $foto->extension();
+            $oldFoto = storage_path(__('app/public/userfoto/:namafoto', ['namafoto' => $user->foto]));
+            $foto->move(storage_path('app/public/userfoto'), $namaFoto);
+            File::delete($oldFoto);
+            $request['foto'] = $namaFoto;
         }
         $user->update($request->all());
         return back()->with('success', 'Data berhasil diupdate');

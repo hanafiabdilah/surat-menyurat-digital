@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\TransaksiSurat;
+use File;
 
 class TransaksiSuratController extends Controller
 {
@@ -44,20 +45,26 @@ class TransaksiSuratController extends Controller
         ];
         $this->validate($request, [
             'no_agenda' => 'required|max:50',
-            'no_surat' => 'required',
-            'pengirim' => 'required',
+            'no_surat' => 'required|max:50',
+            'pengirim' => 'required|max:70',
             'isi_ringkas' => 'required|max:255',
             'tanggal_surat' => 'required',
             'tanggal_diterima' => 'required',
             'kategori' => 'required',
             'keterangan' => 'max:255',
-            'file' => 'max:2048',
+            'upload' => 'max:2048',
         ], $messages);
 
         $cekNoAgenda = TransaksiSurat::where('no_agenda', $request->no_agenda)->count();
         $cekNoSurat = TransaksiSurat::where('no_surat', $request->no_surat)->count();
         if ($cekNoAgenda < 1) {
             if ($cekNoSurat < 1) {
+                if ($request->file('upload')) {
+                    $file = $request->file('upload');
+                    $namaFile = time() . '.' . $file->extension();
+                    $file->move(storage_path('app/public/surat'), $namaFile);
+                    $request['file'] = $namaFile;
+                }
                 $request['created_by'] = Auth::user()->id;
                 $request['updated_by'] = '';
                 TransaksiSurat::create($request->all());
@@ -77,6 +84,7 @@ class TransaksiSuratController extends Controller
     public function show($id)
     {
         $transaksiSurat = TransaksiSurat::find($id);
+        return view('transaksi_surat.show', compact('transaksiSurat'));
     }
 
     /**
@@ -88,6 +96,7 @@ class TransaksiSuratController extends Controller
     public function edit($id)
     {
         $transaksiSurat = TransaksiSurat::find($id);
+        return view('transaksi_surat.edit', compact('transaksiSurat'));
     }
 
     /**
@@ -99,10 +108,41 @@ class TransaksiSuratController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'required' => 'Tidak boleh kosong',
+            'max' => 'Tidak boleh melebihi :max karakter',
+        ];
+        $this->validate($request, [
+            'no_agenda' => 'required|max:50',
+            'no_surat' => 'required|max:50',
+            'pengirim' => 'required|max:70',
+            'isi_ringkas' => 'required|max:255',
+            'tanggal_surat' => 'required',
+            'tanggal_diterima' => 'required',
+            'keterangan' => 'max:255',
+            'upload' => 'max:2048',
+        ], $messages);
+
         $transaksiSurat = TransaksiSurat::find($id);
-        $request->request->add(['updated_by' => 'admin']);
-        $transaksiSurat->update($request->all());
-        return back()->with('message', 'Surat berhasil update');
+        $cekNoAgenda = TransaksiSurat::where('no_agenda', $request->no_agenda)->where('no_agenda', '!=', $transaksiSurat->no_agenda)->count();
+        $cekNoSurat = TransaksiSurat::where('no_surat', $request->no_surat)->where('no_surat', '!=', $transaksiSurat->no_surat)->count();
+        if ($cekNoAgenda < 1) {
+            if ($cekNoSurat < 1) {
+                if ($request->file('upload')) {
+                    $file = $request->file('upload');
+                    $namaFile = time() . '.' . $file->extension();
+                    $oldFile = storage_path(__('app/public/surat/:namafile', ['namafile' => $transaksiSurat->file]));
+                    $file->move(storage_path('app/public/surat'), $namaFile);
+                    File::delete($oldFile);
+                    $request['file'] = $namaFile;
+                }
+                $request['updated_by'] = Auth::user()->id;
+                $transaksiSurat->update($request->all());
+                return redirect(route('transaksisurat.edit', $transaksiSurat->id))->with('success', 'Surat berhasil ditambahkan');
+            }
+            return back()->with('error', 'No surat sudah ada');
+        }
+        return back()->with('error', 'No agenda sudah ada');
     }
 
     /**
@@ -115,6 +155,16 @@ class TransaksiSuratController extends Controller
     {
         $transaksiSurat = TransaksiSurat::find($id);
         $transaksiSurat->delete();
-        return back()->with('message', 'Surat berhasil dihapus');
+        return back()->with('success', 'Surat berhasil dihapus');
+    }
+
+    public function downloadFile($file)
+    {
+        return response()->download(storage_path("app/public/surat/{$file}"));
+    }
+
+    public function viewFile($file)
+    {
+        return view('transaksi_surat.view_file', compact('file'));
     }
 }

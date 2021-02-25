@@ -31,15 +31,15 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="file">Foto</label>
+                                    <label for="upload">Foto</label>
                                 </div>
                                 <div class="col-12 col-md-2">
                                     <img src="{{ asset('storage/userfoto') }}/{{ $user->foto }}" id="previewImg" width="100px">
                                 </div>
                                 <div class="col-12 col-md-7 p-3">
-                                    <input type="file" id="file" name="file" class="form-control-file" accept=".jpg, .jpeg, .png" onchange="previewFile(this)">
+                                    <input type="file" id="upload" name="upload" class="form-control-file" accept=".jpg, .jpeg, .png" onchange="previewFile(this)">
                                     <small class="form-text">Max: 2MB | .jpg, .jpeg, .png | 1:1</small>
-                                    @error('file')
+                                    @error('upload')
                                     <small class="form-text text-danger">Ukuran file tidak boleh melebihi 2MB</small>
                                     @enderror
                                 </div>
@@ -68,8 +68,8 @@
                             </div>
                         </div>
                         <div class="au-card-footer">
-                            <button type="submit" class="btn btn-warning btn-sm">
-                                <i class="fa fa-dot-circle-o"></i> Update
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-upload"></i> Update
                             </button>
                         </div>
                     </form>

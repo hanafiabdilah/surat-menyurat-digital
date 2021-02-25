@@ -48,8 +48,8 @@
                             </div>
                         </div>
                         <div class="au-card-footer">
-                            <button type="submit" class="btn btn-warning btn-sm">
-                                <i class="fa fa-dot-circle-o"></i> Update
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-upload"></i> Update
                             </button>
                         </div>
                     </form>

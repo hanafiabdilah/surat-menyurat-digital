@@ -39,7 +39,23 @@
                                                 <td>{{ $t->pengirim }}</td>
                                                 <td>{{ $t->tanggal_surat->format('d-m-Y') }}</td>
                                                 <td class="{{ request()->is($t->kategori == 'in') ? 'text-success' : 'text-danger' }}">{{ request()->is($t->kategori == 'in') ? 'Masuk' : 'Keluar' }}</td>
-                                                <td>-</td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-info rounded-circle item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="zmdi zmdi-more"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="">Disposisi</a>
+                                                            <a class="dropdown-item" href="{{ route('transaksisurat.show', $t->id) }}">Detail</a>
+                                                            <a class="dropdown-item" href="{{ route('transaksisurat.edit', $t->id) }}">Edit</a>
+                                                            <form action="{{ route('transaksisurat.destroy', $t->id ) }}" method="post">
+                                                                @csrf
+                                                                <input name="_method" type="hidden" value="DELETE">
+                                                                <button type="submit" class="dropdown-item">Hapus</button>
+                                                            </form>
+                                                        </div>
+                                                      </div>
+                                                </td>
                                             </tr>                          
                                         @endforeach
                                         @else
