@@ -37,7 +37,11 @@
                                     <img src="{{ asset('storage/userfoto') }}/{{ $user->foto }}" id="previewImg" width="100px">
                                 </div>
                                 <div class="col-12 col-md-7 p-3">
-                                    <input type="file" id="file" name="file" class="form-control-file" accept=".svg, .jpg, .jpeg, .png" onchange="previewFile(this)">
+                                    <input type="file" id="file" name="file" class="form-control-file" accept=".jpg, .jpeg, .png" onchange="previewFile(this)">
+                                    <small class="form-text">Max: 2MB | .jpg, .jpeg, .png | 1:1</small>
+                                    @error('file')
+                                    <small class="form-text text-danger">Ukuran file tidak boleh melebihi 2MB</small>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -45,7 +49,10 @@
                                     <label for="nama">Nama</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="text" id="nama" name="nama" class="form-control" value="{{ ucwords(strtolower($user->nama)) }}" required>
+                                    <input type="text" id="nama" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ ucwords(strtolower($user->nama)) }}">
+                                    @error('nama')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -53,7 +60,10 @@
                                     <label for="email">Email</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="email" id="email" name="email" class="form-control" value="{{ $user->email }}" required>
+                                    <input id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email }}">
+                                    @error('email')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

@@ -18,7 +18,10 @@
                                     <label for="password_lama">Password Lama</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="password" id="password_lama" name="password_lama" class="form-control" required>
+                                    <input type="password" id="password_lama" name="password_lama" class="form-control @error('password_lama') is-invalid @enderror">
+                                    @error('password_lama')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -26,7 +29,10 @@
                                     <label for="password">Password Baru</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="password" id="password" name="password" class="form-control" required>
+                                    <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror">
+                                    @error('password')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -34,7 +40,10 @@
                                     <label for="konfirmasi">Konfirmasi Password</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="password" id="konfirmasi" name="konfirmasi" class="form-control" required>
+                                    <input type="password" id="konfirmasi" name="konfirmasi" class="form-control @error('konfirmasi') is-invalid @enderror">
+                                    @error('konfirmasi')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

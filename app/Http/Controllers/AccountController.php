@@ -18,6 +18,16 @@ class AccountController extends Controller
 
     public function update(Request $request)
     {
+        $messages = [
+            'max' => 'Tidak boleh melebihi :max karakter',
+            'regex' => 'Hanya boleh diisi dengan huruf',
+            'email' => 'Harus diisi dengan email',
+        ];
+        $this->validate($request, [
+            'nama' => 'max:50|regex:/^[a-zA-Z ]+$/',
+            'email' => 'max:50|email',
+            'file' => 'max:2048',
+        ], $messages);
         $user = User::where('id', Auth::user()->id)->first();
         if ($request->file('file')) {
             $file = $request->file('file');
@@ -38,6 +48,16 @@ class AccountController extends Controller
 
     public function updatePassword(Request $request)
     {
+        $messages = [
+            'required' => 'Tidak boleh kosong',
+            'min' => 'Tidak boleh kurang dari :min karakter',
+            'max' => 'Tidak boleh lebih dari :max karakter',
+        ];
+        $this->validate($request, [
+            'password_lama' => 'required',
+            'password' => 'required|min:8|max:16',
+            'konfirmasi' => 'required|min:8|max:16',
+        ], $messages);
         $user = User::where('id', Auth::user()->id)->first();
         if (Hash::check($request->password_lama, $user->password)) {
             if ($request->password === $request->konfirmasi) {
