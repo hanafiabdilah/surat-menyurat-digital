@@ -90,7 +90,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $d->tujuan }}</td>
                                             <td>{{ $d->sifat_surat }}</td>
-                                            <td>{{ $d->batas_waktu->format('d/m/y') }}</td>
+                                            <td>{{ $d->batas_waktu->format('d/m/Y') }}</td>
                                             <td>
                                                 <div class="dropdown">
                                                     <button class="btn btn-info rounded-circle item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
