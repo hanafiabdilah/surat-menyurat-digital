@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Transaksi Surat | Detail')
+@section('title', 'Detail Transaksi Surat')
 
 @section('body')
     <div class="row">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Transaksi Surat | Detail')
+@section('title', 'Edit Transaksi Surat')
 
 @section('body')
     <div class="row">
@@ -12,7 +12,7 @@
             <div class="au-card">
                 <div class="au-card-inner">
                     <div class="au-card-header">
-                        <h3 class="title-2">Detail Transaksi Surat</h3>
+                        <h3 class="title-2">Edit Transaksi Surat</h3>
                     </div>
                     <form action="{{ route('transaksisurat.update', $transaksiSurat->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf

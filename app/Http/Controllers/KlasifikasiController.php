@@ -38,10 +38,20 @@ class KlasifikasiController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'required' => 'Tidak boleh kosong',
+            'min' => 'Harus diisi minimal :min karakter',
+            'max' => 'Tidak boleh melebihi :max karakter',
+            'regex' => 'Hanya boleh diisi dengan huruf',
+        ];
+        $this->validate($request, [
+            'nama' => 'required|min:8|max:50|regex:/^[a-zA-Z .]+$/',
+            'jabatan' => 'required|min:4|max:50|regex:/^[a-zA-Z ]+$/',
+        ], $messages);
         $request['created_by'] = Auth::user()->id;
-        $request['updated_by'] = Auth::user()->id;
+        $request['updated_by'] = '';
         Klasifikasi::create($request->all());
-        return back()->with('message', 'Klasifikasi berhasil ditambahkan');
+        return redirect(route('klasifikasi.index'))->with('success', 'Klasifikasi berhasil ditambahkan');
     }
 
     /**
@@ -52,7 +62,7 @@ class KlasifikasiController extends Controller
      */
     public function show($id)
     {
-        $klasifikasi = Klasifikasi::find($id);
+        return abort(404);
     }
 
     /**
@@ -64,6 +74,7 @@ class KlasifikasiController extends Controller
     public function edit($id)
     {
         $klasifikasi = Klasifikasi::find($id);
+        return view('klasifikasi.edit', compact('klasifikasi'));
     }
 
     /**
@@ -75,10 +86,20 @@ class KlasifikasiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'required' => 'Tidak boleh kosong',
+            'min' => 'Harus diisi minimal :min karakter',
+            'max' => 'Tidak boleh melebihi :max karakter',
+            'regex' => 'Hanya boleh diisi dengan huruf',
+        ];
+        $this->validate($request, [
+            'nama' => 'required|min:8|max:50|regex:/^[a-zA-Z .]+$/',
+            'jabatan' => 'required|min:4|max:50|regex:/^[a-zA-Z ]+$/',
+        ], $messages);
         $klasifikasi = Klasifikasi::find($id);
-        $request->request->add(['updated_by' => 'admin']);
+        $request['updated_by'] = Auth::user()->id;
         $klasifikasi->update($request->all());
-        return back()->with('message', 'Klasifikasi berhasil diupdate');
+        return back()->with('success', 'Klasifikasi berhasil diupdate');
     }
 
     /**
@@ -91,6 +112,6 @@ class KlasifikasiController extends Controller
     {
         $klasifikasi = Klasifikasi::find($id);
         $klasifikasi->delete();
-        return back()->with('message', 'Klasifikasi berhasil dihapus');
+        return back()->with('success', 'Klasifikasi berhasil dihapus');
     }
 }

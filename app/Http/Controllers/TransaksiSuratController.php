@@ -42,11 +42,12 @@ class TransaksiSuratController extends Controller
         $messages = [
             'required' => 'Tidak boleh kosong',
             'max' => 'Tidak boleh melebihi :max karakter',
+            'regex' => 'Hanya boleh diisi dengan huruf',
         ];
         $this->validate($request, [
             'no_agenda' => 'required|max:50',
             'no_surat' => 'required|max:50',
-            'pengirim' => 'required|max:70',
+            'pengirim' => 'required|max:70|regex:/^[a-zA-Z ]+$/',
             'isi_ringkas' => 'required|max:255',
             'tanggal_surat' => 'required',
             'tanggal_diterima' => 'required',
@@ -111,11 +112,12 @@ class TransaksiSuratController extends Controller
         $messages = [
             'required' => 'Tidak boleh kosong',
             'max' => 'Tidak boleh melebihi :max karakter',
+            'regex' => 'Hanya boleh diisi dengan huruf',
         ];
         $this->validate($request, [
             'no_agenda' => 'required|max:50',
             'no_surat' => 'required|max:50',
-            'pengirim' => 'required|max:70',
+            'pengirim' => 'required|max:70|regex:/^[a-zA-Z ]+$/',
             'isi_ringkas' => 'required|max:255',
             'tanggal_surat' => 'required',
             'tanggal_diterima' => 'required',

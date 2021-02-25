@@ -14,7 +14,7 @@
                         <div class="table-data__tool">
                             <div class="table-data__tool-left">                                        
                                 <a href="{{ route('transaksisurat.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                <i class="zmdi zmdi-plus"></i>    Tambah</a>
+                                <i class="zmdi zmdi-plus"></i> Tambah</a>
                             </div>
                         </div>
                         <div class="table-responsive table--no-card m-b-30">

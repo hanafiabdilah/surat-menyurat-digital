@@ -21,7 +21,7 @@
                 </li>
                 <li class="{{ request()->is('user') ? 'active' : '' }}{{ request()->is('user/*') ? 'active' : '' }}">
                     <a href="{{ route('user.index') }}">
-                    <i class="zmdi zmdi-account-calendar"></i>User</a>
+                    <i class="fa fa-users"></i>User</a>
                 </li>
                 
             </ul>
