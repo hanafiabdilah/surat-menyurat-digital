@@ -34,10 +34,11 @@
                                     @if($countTransaksi > 0)
                                         @foreach($transaksiSurats as $t)
                                             <tr>                                                
-                                                <td>{{ $t->no_agenda }}</td>
+                                                <td style="vertical-align: middle">{{ $t->no_agenda }}</td>
                                                 <td>{{ $t->no_surat }}</td>
                                                 <td>{{ $t->pengirim }}</td>
                                                 <td>{{ $t->tanggal_surat->format('d-m-Y') }}</td>
+                                                <td class="{{ request()->is($t->kategori == 'in') ? 'text-success' : 'text-danger' }}">{{ request()->is($t->kategori == 'in') ? 'Masuk' : 'Keluar' }}</td>
                                                 <td>-</td>
                                             </tr>                          
                                         @endforeach
