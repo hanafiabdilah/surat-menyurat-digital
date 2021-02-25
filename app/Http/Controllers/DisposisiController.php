@@ -42,17 +42,13 @@ class DisposisiController extends Controller
      */
     public function store(Request $request, $id_surat)
     {
-        $messages = [
-            'required' => 'Tidak boleh kosong',
-            'max' => 'Tidak boleh melebihi :max karakter',
-        ];
         $this->validate($request, [
             'tujuan' => 'required',
             'sifat_surat' => 'required',
             'isi_ringkas' => 'required|max:255',
             'batas_waktu' => 'required',
             'catatan' => 'max:255',
-        ], $messages);
+        ]);
         $request['id_transaksi_surat'] = $id_surat;
         Disposisi::create($request->all());
         return redirect(route('disposisi.index', $id_surat))->with('success', 'Disposisi berhasil ditambahkan');
@@ -92,17 +88,13 @@ class DisposisiController extends Controller
      */
     public function update(Request $request, $id_surat, $id)
     {
-        $messages = [
-            'required' => 'Tidak boleh kosong',
-            'max' => 'Tidak boleh melebihi :max karakter',
-        ];
         $this->validate($request, [
             'tujuan' => 'required',
             'sifat_surat' => 'required',
             'isi_ringkas' => 'required|max:255',
             'batas_waktu' => 'required',
             'catatan' => 'max:255',
-        ], $messages);
+        ]);
         $disposisi = Disposisi::find($id);
         $disposisi->update($request->all());
         return back()->with('success', 'Disposisi berhasil diupdate');

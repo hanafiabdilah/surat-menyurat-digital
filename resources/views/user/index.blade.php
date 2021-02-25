@@ -3,58 +3,65 @@
 @section('title', 'User')
 
 @section('body')
-<div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <!-- USER DATA-->
-            <div class="user-data m-b-30">
-                <h3 class="title-3 m-b-30">
-                    <i class="zmdi zmdi-account-calendar"></i>user data</h3>
-                <div class="filters m-b-45">
-                <a href="{{ route('user.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
-            <i class="zmdi zmdi-plus"></i>    Tambah</a>
+            <div class="au-card">
+                <div class="au-card-inner">
+                    <div class="au-card-header">
+                        <h3 class="title-2">User</h3>
+                    </div>
+                    <div class="au-card-body mt-3 mb-3"> 
+                        <a href="{{ route('user.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
+                            <i class="zmdi zmdi-plus"></i> Tambah
+                        </a>
+                        <div class="table-responsive table--no-card m-b-30">
+                            <table class="table table-borderless table-striped text-center">
+                                <thead class="bg-info">
+                                    <tr>                      
+                                        <th class="text-light">No.</th>                             
+                                        <th class="text-light">Nama</th>
+                                        <th class="text-light">Role</th>
+                                        <th class="text-light">Email</th>
+                                        <th class="text-light">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if($users->count() >0)
+                                        @foreach($users as $u)
+                                        <tr>        
+                                            <td>{{ $loop->iteration }}</td>                                            
+                                            <td>{{ $u->nama }}</td>
+                                            <td><span class="role user">{{ $u->role }}</span></td>
+                                            <td>{{ $u->email }}</td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-info rounded-circle item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="zmdi zmdi-more"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item" href="{{ route('user.show', $u->id) }}">Detail</a>
+                                                        <a class="dropdown-item" href="{{ route('user.edit', $u->id) }}">Edit</a>
+                                                        <form action="{{ route('user.destroy', $u->id ) }}" method="post">
+                                                            @csrf
+                                                            <input name="_method" type="hidden" value="DELETE">
+                                                            <button type="submit" class="dropdown-item">Hapus</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="6">Data tidak ditemukan</td>                                           
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>         
+                    </div>
                 </div>
-                <div class="table-responsive table-data">
-                    <table class="table">
-                        <thead>
-                            <tr>                                                   
-                                <td>name</td>
-                                <td>role</td>
-                                <td>email</td>
-                                <td>action</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if($countUser >0)
-                                @foreach($users as $u)
-                                <tr>                                                    
-                                    <td>
-                                        <div class="table-data__info">
-                                            <h6>{{ $u->nama }}</h6>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <span class="role user">{{ $u->role }}</span>
-                                    </td>
-                                    <td>
-                                    <span href="#">{{ $u->email }}</span>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('user.show', $u->id) }}" class="btn btn-info rounded-circle item"><i class="zmdi zmdi-more"></i></a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            @else
-                                <tr>
-                                    <td align="center" colspan="6">Data Kosong</td>                                           
-                                </tr>
-                            @endif
-                        </tbody>
-                    </table>
-                </div>                                    
             </div>
-            <!-- END USER DATA-->
         </div>                            
     </div>
-</div>
 @endsection

@@ -39,22 +39,17 @@ class TransaksiSuratController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
-            'required' => 'Tidak boleh kosong',
-            'max' => 'Tidak boleh melebihi :max karakter',
-            'regex' => 'Hanya boleh diisi dengan huruf',
-        ];
         $this->validate($request, [
             'no_agenda' => 'required|max:50',
             'no_surat' => 'required|max:50',
-            'pengirim' => 'required|max:70|regex:/^[a-zA-Z ]+$/',
+            'pengirim' => 'required|max:70|regex:/^[a-zA-Z .]+$/',
             'isi_ringkas' => 'required|max:255',
             'tanggal_surat' => 'required',
             'tanggal_diterima' => 'required',
             'kategori' => 'required',
             'keterangan' => 'max:255',
             'upload' => 'max:2048',
-        ], $messages);
+        ]);
 
         $cekNoAgenda = TransaksiSurat::where('no_agenda', $request->no_agenda)->count();
         $cekNoSurat = TransaksiSurat::where('no_surat', $request->no_surat)->count();
@@ -109,21 +104,16 @@ class TransaksiSuratController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $messages = [
-            'required' => 'Tidak boleh kosong',
-            'max' => 'Tidak boleh melebihi :max karakter',
-            'regex' => 'Hanya boleh diisi dengan huruf',
-        ];
         $this->validate($request, [
             'no_agenda' => 'required|max:50',
             'no_surat' => 'required|max:50',
-            'pengirim' => 'required|max:70|regex:/^[a-zA-Z ]+$/',
+            'pengirim' => 'required|max:70|regex:/^[a-zA-Z .]+$/',
             'isi_ringkas' => 'required|max:255',
             'tanggal_surat' => 'required',
             'tanggal_diterima' => 'required',
             'keterangan' => 'max:255',
             'upload' => 'max:2048',
-        ], $messages);
+        ]);
 
         $transaksiSurat = TransaksiSurat::find($id);
         $cekNoAgenda = TransaksiSurat::where('no_agenda', $request->no_agenda)->where('no_agenda', '!=', $transaksiSurat->no_agenda)->count();

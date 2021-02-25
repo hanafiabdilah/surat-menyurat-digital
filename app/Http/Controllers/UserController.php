@@ -15,12 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-         $users = User::where([
-             ['role','=','Staff']
-         ])->get();
-         $countUser = User::count();
-
-         return view('user.index',compact('users','countUser'));
+        $users = User::where('role', 'staff')->orderBy('created_at', 'DESC')->get();
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -41,14 +37,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama' => 'required|min:6|max:50|regex:/^[a-zA-Z .]+$/',
+            'email' => 'required|email|min:8|max:50|',
+            'username' => 'required|min:5|max:16|regex:/^[a-zA-Z0-9]+$/',
+            'password' => 'required|min:8|max:20',
+            'role' => 'required',
+        ]);
         $cekUsername = User::where('username', $request->username)->count();
         if ($cekUsername < 1) {
             $request->request->add(['created_by' => 'admin']);
             $request['password'] = Hash::make($request->password);
             User::create($request->all());
-            return back()->with('message', 'User berhasil ditambahkan');
+            return redirect(route('user.index'))->with('success', 'User berhasil ditambahkan');
         }
-        return back()->with('message', 'Username sudah digunakan');
+        return back()->with('error', 'Username sudah digunakan')->withInput();
     }
 
     /**
@@ -60,7 +63,10 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('user.show',compact('user'));
+        if ($user->role != 'admin') {
+            return view('user.show', compact('user'));
+        }
+        return abort(404);
     }
 
     /**
@@ -84,14 +90,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'nama' => 'required|min:6|max:50|regex:/^[a-zA-Z .]+$/',
+            'email' => 'required|email|min:8|max:50|',
+            'role' => 'required',
+        ]);
         $user = User::find($id);
-        $cekUsername = User::where('username', $request->username)->count();
-        if ($cekUsername < 1) {
-            $request['password'] = Hash::make($request->password);
-            $user->update($request->all());
-            return back()->with('message', 'User berhasil diupdate');
-        }
-        return back()->with('message', 'Username sudah digunakan');
+        $request['password'] = Hash::make($request->password);
+        $user->update($request->all());
+        return back()->with('success', 'User berhasil diupdate');
     }
 
     /**
@@ -104,6 +111,6 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        return back()->with('message', 'User berhasil dihapus');
+        return back()->with('success', 'User berhasil dihapus');
     }
 }

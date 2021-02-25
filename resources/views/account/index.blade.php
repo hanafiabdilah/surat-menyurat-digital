@@ -40,7 +40,7 @@
                                     <input type="file" id="upload" name="upload" class="form-control-file" accept=".jpg, .jpeg, .png" onchange="previewFile(this)">
                                     <small class="form-text">Max: 2MB | .jpg, .jpeg, .png | 1:1</small>
                                     @error('upload')
-                                    <small class="form-text text-danger">Ukuran file tidak boleh melebihi 2MB</small>
+                                    <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>

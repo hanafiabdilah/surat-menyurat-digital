@@ -38,16 +38,10 @@ class KlasifikasiController extends Controller
      */
     public function store(Request $request)
     {
-        $messages = [
-            'required' => 'Tidak boleh kosong',
-            'min' => 'Harus diisi minimal :min karakter',
-            'max' => 'Tidak boleh melebihi :max karakter',
-            'regex' => 'Hanya boleh diisi dengan huruf',
-        ];
         $this->validate($request, [
             'nama' => 'required|min:8|max:50|regex:/^[a-zA-Z .]+$/',
             'jabatan' => 'required|min:4|max:50|regex:/^[a-zA-Z ]+$/',
-        ], $messages);
+        ]);
         $request['created_by'] = Auth::user()->id;
         $request['updated_by'] = '';
         Klasifikasi::create($request->all());
@@ -86,16 +80,10 @@ class KlasifikasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $messages = [
-            'required' => 'Tidak boleh kosong',
-            'min' => 'Harus diisi minimal :min karakter',
-            'max' => 'Tidak boleh melebihi :max karakter',
-            'regex' => 'Hanya boleh diisi dengan huruf',
-        ];
         $this->validate($request, [
             'nama' => 'required|min:8|max:50|regex:/^[a-zA-Z .]+$/',
             'jabatan' => 'required|min:4|max:50|regex:/^[a-zA-Z ]+$/',
-        ], $messages);
+        ]);
         $klasifikasi = Klasifikasi::find($id);
         $request['updated_by'] = Auth::user()->id;
         $klasifikasi->update($request->all());

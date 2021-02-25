@@ -4,11 +4,10 @@
 
 @section('body')
     <div class="row">
-        <div class="col-lg-12">
-            <div class="table-data__tool-left mb-3">                                        
-                <a href="{{ route('transaksisurat.index') }}" class="btn btn-secondary">
-                <i class="fa fa-chevron-left"></i> Kembali</a>
-            </div>
+        <div class="col-lg-12">                                    
+            <a href="{{ route('transaksisurat.index') }}" class="btn btn-secondary mb-3">
+                <i class="fa fa-chevron-left"></i> Kembali
+            </a>
             <div class="au-card">
                 <div class="au-card-inner">
                     <div class="au-card-header">

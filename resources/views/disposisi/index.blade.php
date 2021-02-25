@@ -5,21 +5,14 @@
 @section('body')
     <div class="row">
         <div class="col-lg-12">
-            <div class="table-data__tool-left mb-3">                                        
-                <a href="{{ route('transaksisurat.index') }}" class="btn btn-secondary">
-                <i class="fa fa-chevron-left"></i> Kembali</a>
-            </div>
+            <a href="{{ route('transaksisurat.index') }}" class="btn btn-secondary mb-3">
+                <i class="fa fa-chevron-left"></i> Kembali
+            </a>
             <div class="au-card">
                 <div class="au-card-header">
                     <h3 class="title-2">Disposisi</h3>
                 </div>
                 <div class="au-card-body mt-3 mb-3">
-                    <div class="table-data__tool">
-                        <div class="table-data__tool-left">                                        
-                            <a href="{{ route('disposisi.create', $id_surat) }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
-                            <i class="zmdi zmdi-plus"></i> Tambah</a>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="row form-group">
@@ -76,6 +69,9 @@
                             </div> 
                         </div>
                     </div>
+                    <a href="{{ route('disposisi.create', $id_surat) }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
+                        <i class="zmdi zmdi-plus"></i> Tambah
+                    </a>
                     <div class="table-responsive table--no-card m-b-30">
                         <table class="table table-borderless table-striped text-center">
                             <thead class="bg-info">

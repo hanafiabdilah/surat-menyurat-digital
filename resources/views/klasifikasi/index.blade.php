@@ -11,12 +11,9 @@
                         <h3 class="title-3">Klasifikasi</h3>
                     </div>
                     <div class="au-card-body mt-3 mb-3">
-                        <div class="table-data__tool">
-                            <div class="table-data__tool-left">                                        
-                                <a href="{{ route('klasifikasi.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                <i class="zmdi zmdi-plus"></i> Tambah</a>
-                            </div>
-                        </div>
+                        <a href="{{ route('klasifikasi.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
+                            <i class="zmdi zmdi-plus"></i> Tambah
+                        </a>
                         <div class="table-responsive table--no-card m-b-30">
                             <table class="table table-borderless table-striped text-center">
                                 <thead class="bg-info">
