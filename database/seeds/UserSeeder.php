@@ -17,8 +17,9 @@ class UserSeeder extends Seeder
                 'email' => 'admin@gmail.com',
                 'role' => 'admin',
                 'username' => 'admin',
-                'password' => bcrypt('password'),
-                'created_by' => '',
+                'password' => bcrypt('password'),                
+                'created_by' => '1',
+                'updated_by' => '1',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -28,7 +29,8 @@ class UserSeeder extends Seeder
                 'role' => 'staff',
                 'username' => 'staff',
                 'password' => bcrypt('password'),
-                'created_by' => '',
+                'created_by' => '1',
+                'updated_by' => '1',
                 'created_at' => now(),
                 'updated_at' => now()
             ],

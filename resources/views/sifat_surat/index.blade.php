@@ -10,10 +10,32 @@
                     <div class="au-card-header">
                         <h3 class="title-2">Sifat Surat</h3>
                     </div>
-                    <div class="au-card-body mt-3 mb-3">
-                        <a href="{{ route('sifatsurat.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
-                            <i class="zmdi zmdi-plus"></i> Tambah
-                        </a>
+                    <div class="au-card-body mt-3 mb-3">                        
+                        <div class="table-data__tool">
+                                    <div class="table-data__tool-left">                                            
+                                        <a href="{{ route('sifatsurat.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
+                                            <i class="zmdi zmdi-plus"></i> Tambah
+                                        </a>
+                                        </div>
+                                    <div class="table-data__tool-right">
+                                            <form action="{{ route('filter_surat') }}" method="get">
+                                                    <div class="rs-select2--light rs-select2--md">
+                                                    <select class="js-select2" name="sifat_surat_filter">                                                
+                                                        <option value="" @isset($sifat_surat_filter) @if($sifat_surat_filter == '') selected @endif @endisset>Semua User</option>
+                                                        <option value="surat penting" @isset($sifat_surat_filter) @if($sifat_surat_filter == 'surat penting') selected @endif @endisset>surat penting</option>
+                                                        <option value="surat biasa" @isset($sifat_surat_filter) @if($sifat_surat_filter == 'surat biasa') selected @endif @endisset>surat biasa</option>                                                        
+                                                        <option value="surat dinas" @isset($sifat_surat_filter) @if($sifat_surat_filter == 'surat dinas') selected @endif @endisset>surat dinas</option>                                                        
+                                                        <option value="surat sosial" @isset($sifat_surat_filter) @if($sifat_surat_filter == 'surat sosial') selected @endif @endisset>surat sosial</option>                                                        
+                                                        <option value="surat niaga" @isset($sifat_surat_filter) @if($sifat_surat_filter == 'surat niaga') selected @endif @endisset>surat niaga</option>                                                        
+                                                        <option value="surat pengantar" @isset($sifat_surat_filter) @if($sifat_surat_filter == 'surat pengantar') selected @endif @endisset>surat pengantar</option>                                                        
+                                                    </select>
+                                                    <div class="dropDownSelect2"></div>
+                                                    </div>                                        
+                                                    <button class="au-btn-filter">
+                                                    <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                            </form>
+                                    </div>
+                                </div>
                         <div class="table-responsive table--no-card m-b-30">
                             <table class="table table-borderless table-striped text-center">
                                 <thead class="bg-info">

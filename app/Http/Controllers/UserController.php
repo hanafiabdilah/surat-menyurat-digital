@@ -116,4 +116,13 @@ class UserController extends Controller
         $user->delete();
         return back()->with('success', 'User berhasil dihapus');
     }
+
+    public function filter(Request $request)
+    {
+        $role_filter = $request->role_filter;
+        if($role_filter){
+            $users = User::where('role','LIKE' , '%' . $role_filter . '%')->get();
+            return view('user.index',compact('users','role_filter'));
+        }        
+    }
 }

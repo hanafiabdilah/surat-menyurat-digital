@@ -98,4 +98,13 @@ class SifatSuratController extends Controller
         $sifatSurat->delete();
         return back()->with('message', 'Sifat Surat berhasil dihapus');
     }
+
+    public function filter(Request $request)
+    {
+        $sifat_surat_filter = $request->sifat_surat_filter;
+        if($sifat_surat_filter){
+            $sifatSurat = SifatSurat::where('sifat_surat','LIKE' , '%' . $sifat_surat_filter . '%')->get();
+            return view('sifat_surat.index',compact('sifatSurat','sifat_surat_filter'));
+        }        
+    }
 }

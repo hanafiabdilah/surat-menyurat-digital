@@ -10,10 +10,28 @@
                     <div class="au-card-header">
                         <h3 class="title-2">User</h3>
                     </div>
-                    <div class="au-card-body mt-3 mb-3"> 
-                        <a href="{{ route('user.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
-                            <i class="zmdi zmdi-plus"></i> Tambah
-                        </a>
+                    <div class="au-card-body mt-3 mb-3">                         
+                        <div class="table-data__tool">
+                                    <div class="table-data__tool-left">                                            
+                                        <a href="{{ route('user.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
+                                        <i class="zmdi zmdi-plus"></i> Tambah
+                                    </a>                                        
+                                        </div>
+                                    <div class="table-data__tool-right">
+                                            <form action="{{ route('filter_user') }}" method="get">
+                                                    <div class="rs-select2--light rs-select2--md">
+                                                    <select class="js-select2" name="role">                                                
+                                                        <option value="" @isset($role) @if($role == '') selected @endif @endisset>Semua User</option>
+                                                        <option value="admin" @isset($role) @if($role == 'admin') selected @endif @endisset>Admin</option>
+                                                        <option value="staff" @isset($role) @if($role == 'staff') selected @endif @endisset>Staff</option>                                                        
+                                                    </select>
+                                                    <div class="dropDownSelect2"></div>
+                                                    </div>                                        
+                                                    <button class="au-btn-filter">
+                                                    <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                            </form>
+                                    </div>
+                                </div>
                         <div class="table-responsive table--no-card m-b-30">
                             <table class="table table-borderless table-striped text-center">
                                 <thead class="bg-info">

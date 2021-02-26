@@ -42,6 +42,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('transaksisurat/f/filter', 'TransaksiSuratController@filter')->name('filter');
+    Route::get('user/f/filter', 'userController@filter')->name('filter_user');
+    Route::get('sifatsurat/f/filter', 'SifatSuratController@filter')->name('filter_surat');
     Route::resource('transaksisurat', 'TransaksiSuratController')->only('index', 'show');
     Route::resource('transaksisurat/{id_surat}/disposisi', 'DisposisiController')->only('index', 'edit');
     Route::resource('klasifikasi', 'KlasifikasiController')->only('index');
