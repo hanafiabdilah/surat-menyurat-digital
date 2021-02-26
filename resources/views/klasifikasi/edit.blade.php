@@ -73,9 +73,11 @@
                             </div>
                         </div>
                         <div class="au-card-footer">
+                            @if(Auth::user()->role == 'admin')
                             <button class="btn btn-sm btn-primary">
                                 <i class="fa fa-upload"></i> Update
                             </button>
+                            @endif
                         </div>
                     </form>
                 </div>

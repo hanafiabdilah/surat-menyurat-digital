@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use App\TransaksiSurat;
 use App\Disposisi;
 use File;
@@ -166,30 +167,73 @@ class TransaksiSuratController extends Controller
         $kategori = $request->kategori;
         $dari_tanggal = $request->dari_tanggal;
         $sampai_tanggal = $request->sampai_tanggal;
-        if ($dari_tanggal) {
-            if ($sampai_tanggal) {
-                if ($berdasarkan) {
-                    $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->whereDate($berdasarkan, '>=', $dari_tanggal)->whereDate($berdasarkan, '<=', $sampai_tanggal)->orderBy($berdasarkan, 'DESC')->get();
-                }
-                $this->validate($request, [
-                    'berdasarkan' => 'required',
-                ]);
-            }
-            $this->validate($request, [
-                'sampai_tanggal' => 'required',
-                'berdasarkan' => 'required',
-            ]);
-        } elseif ($sampai_tanggal) {
+        session(["berdasarkan" => $berdasarkan]);
+        session(["kategori" => $kategori]);
+        session(["dari_tanggal" => $dari_tanggal]);
+        session(["sampai_tanggal" => $sampai_tanggal]);
+        if (!$berdasarkan and !$dari_tanggal and !$sampai_tanggal) {
+            $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->orderBy('no_agenda', 'DESC')->get();
+        } elseif ($berdasarkan and !$dari_tanggal and !$sampai_tanggal) {
             $this->validate($request, [
                 'dari_tanggal' => 'required',
+                'sampai_tanggal' => 'required',
+            ]);
+        } elseif ($berdasarkan and $dari_tanggal and !$sampai_tanggal) {
+            $this->validate($request, [
+                'sampai_tanggal' => 'required',
+            ]);
+        } elseif ($berdasarkan and !$dari_tanggal and $sampai_tanggal) {
+            $this->validate($request, [
+                'dari_tanggal' => 'required',
+            ]);
+        } elseif (!$berdasarkan and $dari_tanggal and !$sampai_tanggal) {
+            $this->validate($request, [
+                'berdasarkan' => 'required',
+                'sampai_tanggal' => 'required',
+            ]);
+        } elseif (!$berdasarkan and !$dari_tanggal and $sampai_tanggal) {
+            $this->validate($request, [
+                'berdasarkan' => 'required',
+                'dari_tanggal' => 'required',
+            ]);
+        } elseif (!$berdasarkan and $dari_tanggal and $sampai_tanggal) {
+            $this->validate($request, [
                 'berdasarkan' => 'required',
             ]);
-            $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->orderBy($berdasarkan, 'DESC')->get();
         } else {
-            $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->orderBy('no_agenda', 'DESC')->get();
+            $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->whereDate($berdasarkan, '>=', $dari_tanggal)->whereDate($berdasarkan, '<=', $sampai_tanggal)->orderBy($berdasarkan, 'DESC')->get();
+        }
+        return view('transaksi_surat.index', compact('transaksiSurats', 'berdasarkan', 'kategori', 'dari_tanggal', 'sampai_tanggal'));
+    }
+
+    public function download()
+    {
+        $berdasarkan = session("berdasarkan");
+        $kategori = session("kategori");
+        $dari_tanggal = session("dari_tanggal");
+        $sampai_tanggal = session("sampai_tanggal");
+
+        if ($berdasarkan) {
+            $transaksiSurat = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->whereDate($berdasarkan, '>=', $dari_tanggal)->whereDate($berdasarkan, '<=', $sampai_tanggal)->orderBy($berdasarkan, 'DESC')->get();
+            $filename = __("TransaksiSurat dari :dariTanggal sampai :sampaiTanggal berdasarkan :berdasarkan.csv", ['dariTanggal' => $dari_tanggal, 'sampaiTanggal' => $sampai_tanggal, 'berdasarkan' => $berdasarkan]);
+        } else {
+            $transaksiSurat = TransaksiSurat::orderBy('no_agenda', 'DESC')->get();
+            $filename = "TransaksiSuratAll.csv";
         }
 
+        $handle = fopen($filename, 'w+');
+        fputcsv($handle, array('No Agenda', 'No Surat', 'Pengirim', 'Isi Ringkas', 'Tanggal Surat', 'Tanggal Diterima', 'Keterangan', 'Kategori', 'Dibuat Pada'));
 
-        return view('transaksi_surat.index', compact('transaksiSurats', 'berdasarkan', 'kategori', 'dari_tanggal', 'sampai_tanggal'));
+        foreach ($transaksiSurat as $row) {
+            fputcsv($handle, array($row['no_agenda'], $row['no_surat'], $row['pengirim'], $row['isi_ringkas'], $row['tanggal_surat'], $row['tanggal_diterima'], $row['keterangan'], $row['kategori'], $row['created_at']));
+        }
+
+        fclose($handle);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+
+        return Response::download($filename, $filename, $headers);
     }
 }

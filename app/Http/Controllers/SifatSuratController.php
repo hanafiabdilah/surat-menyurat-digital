@@ -15,8 +15,8 @@ class SifatSuratController extends Controller
      */
     public function index()
     {
-        $sifatSurat = SifatSurat::all();        
-        return view('sifat_surat.index',compact('sifatSurat'));
+        $sifatSurats = SifatSurat::all();
+        return view('sifat_surat.index', compact('sifatSurats'));
     }
 
     /**
@@ -37,13 +37,14 @@ class SifatSuratController extends Controller
      */
     public function store(Request $request)
     {
-
-        //  $request-> request->add(['created_by' => 'admin', ['updated_by'] => '']);
+        $this->validate($request, [
+            'sifat_surat' => 'required|regex:/^[a-zA-Z ]+$/',
+        ]);
         $request['created_by'] = Auth::user()->id;
         $request['updated_by'] = Auth::user()->id;
 
         SifatSurat::create($request->all());
-        return back()->with('message', 'Sifat Surat berhasil ditambahkan');
+        return redirect(route('sifatsurat.index'))->with('success', 'Sifat Surat berhasil ditambahkan');
     }
 
     /**
@@ -54,8 +55,7 @@ class SifatSuratController extends Controller
      */
     public function show($id)
     {
-        $sifatsurat = SifatSurat::find($id);
-        return view('sifat_surat.show',compact('sifatsurat'));
+        return abort(404);
     }
 
     /**
@@ -68,7 +68,7 @@ class SifatSuratController extends Controller
     {
         $sifatSurat = SifatSurat::find($id);
 
-        return view('sifat_surat.edit',compact('sifatSurat'));
+        return view('sifat_surat.edit', compact('sifatSurat'));
     }
 
     /**
@@ -80,10 +80,13 @@ class SifatSuratController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'sifat_surat' => 'required|regex:/^[a-zA-Z ]+$/',
+        ]);
         $sifatSurat = SifatSurat::find($id);
         $request['updated_by'] = Auth::user()->id;
         $sifatSurat->update($request->all());
-        return back()->with('message', 'Sifat Surat berhasil diupdate');
+        return back()->with('success', 'Sifat Surat berhasil diupdate');
     }
 
     /**
@@ -96,7 +99,7 @@ class SifatSuratController extends Controller
     {
         $sifatSurat = SifatSurat::find($id);
         $sifatSurat->delete();
-        return back()->with('message', 'Sifat Surat berhasil dihapus');
+        return back()->with('success', 'Sifat Surat berhasil dihapus');
     }
 
     public function filter(Request $request)

@@ -34,20 +34,23 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['middleware' => ['role:admin']], function () {
-        //CRUD
         Route::resource('user', 'UserController');
         Route::resource('klasifikasi', 'KlasifikasiController');
         Route::resource('sifatsurat', 'SifatSuratController');
     });
 
-
-    Route::get('transaksisurat/f/filter', 'TransaksiSuratController@filter')->name('filter');
+    Route::get('transaksisurat/f/filter', 'TransaksiSuratController@filter')->name('filter');    
     Route::get('user/f/filter', 'userController@filter')->name('filter_user');
     Route::get('sifatsurat/f/filter', 'SifatSuratController@filter')->name('filter_surat');
+
     Route::resource('transaksisurat', 'TransaksiSuratController')->only('index', 'show');
     Route::resource('transaksisurat/{id_surat}/disposisi', 'DisposisiController')->only('index', 'edit');
     Route::resource('klasifikasi', 'KlasifikasiController')->only('index');
+    Route::resource('sifatsurat', 'SifatSuratController')->only('index');
+
     Route::get('transaksisurat/download/{file}', 'TransaksiSuratController@downloadFile')->name('downloadFile');
+    Route::get('transaksisurat/f/filter', 'TransaksiSuratController@filter')->name('filter');
+    Route::get('transaksisurat/d/download', 'TransaksiSuratController@download')->name('download');
 
     //Logout
     Route::get('logout', 'AuthController@logout')->name('logout');
