@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\SifatSurat;
 
 class SifatSuratController extends Controller
@@ -35,7 +36,8 @@ class SifatSuratController extends Controller
      */
     public function store(Request $request)
     {
-        $request->request->add(['created_by' => 'admin', ['updated_by'] => '']);
+        $request['created_by'] = Auth::user()->id;
+        $request['updated_by'] = Auth::user()->id;
         SifatSurat::create($request->all());
         return back()->with('message', 'Sifat Surat berhasil ditambahkan');
     }
@@ -72,7 +74,7 @@ class SifatSuratController extends Controller
     public function update(Request $request, $id)
     {
         $sifatSurat = SifatSurat::find($id);
-        $request->request->add(['updated_by' => 'admin']);
+        $request['updated_by'] = Auth::user()->id;
         $sifatSurat->update($request->all());
         return back()->with('message', 'Sifat Surat berhasil diupdate');
     }
