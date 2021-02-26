@@ -23,6 +23,10 @@
                     <a href="{{ route('user.index') }}">
                     <i class="fa fa-users"></i>User</a>
                 </li>
+                <li class="{{ request()->is('sifatsurat') ? 'active' : '' }}{{ request()->is('sifatsurat/*') ? 'active' : '' }}">
+                    <a href="{{ route('sifatsurat.index') }}">
+                    <i class="fa fa-users"></i>Sifat Surat</a>
+                </li>
                 
             </ul>
         </nav>

@@ -14,7 +14,8 @@ class SifatSuratController extends Controller
      */
     public function index()
     {
-        $sifatSurat = SifatSurat::all();
+        $sifatSurat = SifatSurat::all();        
+        return view('sifat_surat.index',compact('sifatSurat'));
     }
 
     /**
@@ -24,7 +25,7 @@ class SifatSuratController extends Controller
      */
     public function create()
     {
-        //
+        return view('sifat_surat.create');
     }
 
     /**
@@ -35,7 +36,7 @@ class SifatSuratController extends Controller
      */
     public function store(Request $request)
     {
-        $request->request->add(['created_by' => 'admin', ['updated_by'] => '']);
+        //  $request-> request->add(['created_by' => 'admin', ['updated_by'] => '']);
         SifatSurat::create($request->all());
         return back()->with('message', 'Sifat Surat berhasil ditambahkan');
     }
@@ -48,7 +49,8 @@ class SifatSuratController extends Controller
      */
     public function show($id)
     {
-        $sifatSurat = SifatSurat::find($id);
+        $sifatsurat = SifatSurat::find($id);
+        return view('sifat_surat.show',compact('sifatsurat'));
     }
 
     /**
@@ -60,6 +62,8 @@ class SifatSuratController extends Controller
     public function edit($id)
     {
         $sifatSurat = SifatSurat::find($id);
+
+        return view('sifat_surat.edit',compact('sifatSurat'));
     }
 
     /**
