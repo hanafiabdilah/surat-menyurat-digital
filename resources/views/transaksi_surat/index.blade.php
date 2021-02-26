@@ -59,7 +59,7 @@
                                 <i class="zmdi zmdi-plus"></i> Tambah
                             </a>
                         @endif
-                        <a href="{{ route('transaksisurat.create') }}" class="au-btn au-btn-icon btn-primary au-btn--small mb-3">
+                        <a href="{{ route('download') }}" class="au-btn au-btn-icon btn-primary au-btn--small mb-3">
                             <i class="fa fa-download"></i> Download
                         </a>
                         <div class="table-responsive table--no-card m-b-30">

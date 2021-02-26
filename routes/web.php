@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('transaksisurat/download/{file}', 'TransaksiSuratController@downloadFile')->name('downloadFile');
     Route::get('transaksisurat/f/filter', 'TransaksiSuratController@filter')->name('filter');
+    Route::get('transaksisurat/d/download', 'TransaksiSuratController@download')->name('download');
 
     //Logout
     Route::get('logout', 'AuthController@logout')->name('logout');
