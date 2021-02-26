@@ -186,7 +186,7 @@ class TransaksiSuratController extends Controller
             ]);
             $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->orderBy($berdasarkan, 'DESC')->get();
         } else {
-            $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->get();
+            $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->orderBy('no_agenda', 'DESC')->get();
         }
 
 
