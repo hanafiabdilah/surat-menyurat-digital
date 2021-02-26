@@ -20,10 +20,10 @@
                                     <div class="table-data__tool-right">
                                             <form action="{{ route('filter_user') }}" method="get">
                                                     <div class="rs-select2--light rs-select2--md">
-                                                    <select class="js-select2" name="role">                                                
-                                                        <option value="" @isset($role) @if($role == '') selected @endif @endisset>Semua User</option>
-                                                        <option value="admin" @isset($role) @if($role == 'admin') selected @endif @endisset>Admin</option>
-                                                        <option value="staff" @isset($role) @if($role == 'staff') selected @endif @endisset>Staff</option>                                                        
+                                                    <select class="js-select2" name="role_filter">                                                
+                                                        <option value="" @isset($role_filter) @if($role_filter == '') selected @endif @endisset>Semua User</option>
+                                                        <option value="admin" @isset($role_filter) @if($role_filter == 'admin') selected @endif @endisset>Admin</option>
+                                                        <option value="staff" @isset($role_filter) @if($role_filter == 'staff') selected @endif @endisset>Staff</option>                                                        
                                                     </select>
                                                     <div class="dropDownSelect2"></div>
                                                     </div>                                        
