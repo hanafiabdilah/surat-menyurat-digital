@@ -14,9 +14,11 @@
                     <div class="au-card-body mt-3 mb-3">                        
                         <div class="table-data__tool">
                                     <div class="table-data__tool-left">                                            
-                                        <a href="{{ route('sifatsurat.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
-                                            <i class="zmdi zmdi-plus"></i> Tambah
-                                        </a>
+                                    @if(Auth::user()->role == 'admin')
+                                    <a href="{{ route('sifatsurat.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
+                                        <i class="zmdi zmdi-plus"></i> Tambah
+                                    </a>
+                                    @endif
                                         </div>
                                     <div class="table-data__tool-right">
                                             <form action="{{ route('filter_surat') }}" method="get">
@@ -38,13 +40,7 @@
                                     </div>
                                 </div>
 
-                    <div class="au-card-body mt-3 mb-3">
-                        @if(Auth::user()->role == 'admin')
-                        <a href="{{ route('sifatsurat.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
-                            <i class="zmdi zmdi-plus"></i> Tambah
-                        </a>
-                        @endif
-
+                    <div class="au-card-body mt-3 mb-3">                        
                         <div class="table-responsive table--no-card m-b-30">
                             <table class="table table-borderless table-striped text-center">
                                 <thead class="bg-info">

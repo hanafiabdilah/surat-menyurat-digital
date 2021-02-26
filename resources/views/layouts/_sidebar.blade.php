@@ -27,16 +27,9 @@
                 <li class="{{ request()->is('user') ? 'active' : '' }}{{ request()->is('user/*') ? 'active' : '' }}">
                     <a href="{{ route('user.index') }}">
                     <i class="fa fa-users"></i>User</a>
-                </li>
-<<<<<<< HEAD
-                <li class="{{ request()->is('sifatsurat') ? 'active' : '' }}{{ request()->is('sifatsurat/*') ? 'active' : '' }}">
-                    <a href="{{ route('sifatsurat.index') }}">
-                    <i class="fa fa-envelope"></i>Sifat Surat</a>
-                </li>
-                
-=======
+                </li>                                
                 @endif
->>>>>>> d57ed3c7df1fa94309d484f01e392016f464ed3e
+
             </ul>
         </nav>
     </div>
