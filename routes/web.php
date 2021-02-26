@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => ['role:staff']], function () {
         Route::resource('transaksisurat', 'TransaksiSuratController');
-        Route::resource('/transaksisurat/{id_surat}/disposisi', 'DisposisiController');
+        Route::resource('transaksisurat/{id_surat}/disposisi', 'DisposisiController');
     });
 
     Route::group(['middleware' => ['role:admin']], function () {
@@ -40,10 +40,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('sifatsurat', 'SifatSuratController');
     });
 
+
+    Route::get('transaksisurat/f/filter', 'TransaksiSuratController@filter')->name('filter');
     Route::resource('transaksisurat', 'TransaksiSuratController')->only('index', 'show');
     Route::resource('transaksisurat/{id_surat}/disposisi', 'DisposisiController')->only('index', 'edit');
     Route::resource('klasifikasi', 'KlasifikasiController')->only('index');
-    Route::get('/transaksisurat/download/{file}', 'TransaksiSuratController@downloadFile')->name('downloadFile');
+    Route::get('transaksisurat/download/{file}', 'TransaksiSuratController@downloadFile')->name('downloadFile');
 
     //Logout
     Route::get('logout', 'AuthController@logout')->name('logout');

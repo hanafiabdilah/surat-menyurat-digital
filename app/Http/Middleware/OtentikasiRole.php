@@ -20,6 +20,6 @@ class OtentikasiRole
             return $next($request);
         }
 
-        return back()->with('error', 'Anda tidak memiliki akses');
+        return redirect('dashboard')->with('error', 'Anda tidak memiliki akses');
     }
 }

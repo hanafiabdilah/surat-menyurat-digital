@@ -11,30 +11,90 @@
                         <h3 class="title-2">Transaksi Surat</h3>
                     </div>
                     <div class="au-card-body mt-3 mb-3">
+                        <div class="filter mb-3">
+                            <form action="{{ route('filter') }}" method="get">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="tanggal">Berdasarkan Tanggal</label>
+                                        <select id="tanggal" name="berdasarkan" class="form-control">
+                                            <option value="">Pilih Berdasarkan</option>
+                                            <option value="tanggal_surat" @isset($berdasarkan) @if($berdasarkan == 'tanggal_surat') selected @endif @endisset>Tanggal Surat</option>
+                                            <option value="tanggal_diterima" @isset($berdasarkan) @if($berdasarkan == 'tanggal_diterima') selected @endif @endisset>Tanggal Diterima</option>
+                                            <option value="created_at" @isset($berdasarkan) @if($berdasarkan == 'created_at') selected @endif @endisset>Tanggal Dibuat</option>
+                                        </select>
+                                        @error('berdasarkan')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="kategori">Kategori</label>
+                                        <select id="kategori" name="kategori" class="form-control">
+                                            <option value="" @isset($kategori) @if($kategori == '') selected @endif @endisset>Semua Surat</option>
+                                            <option value="in" @isset($kategori) @if($kategori == 'in') selected @endif @endisset>Surat Masuk</option>
+                                            <option value="out" @isset($kategori) @if($kategori == 'out') selected @endif @endisset>Surat Keluar</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="dari_tanggal">Dari Tanggal</label>
+                                        <input id="dari_tanggal" type="date" name="dari_tanggal" class="form-control" @isset($dari_tanggal) value="{{ $dari_tanggal }}" @endisset>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="sampai_tanggal">Sampai Tanggal</label>
+                                        <input id="sampai_tanggal" type="date" name="sampai_tanggal" class="form-control" @isset($dari_tanggal) value="{{ $sampai_tanggal }}" @endisset>
+                                    </div>
+                                </div>
+                                <button class="au-btn au-btn-icon btn-primary au-btn--small mt-2">
+                                    <i class="zmdi zmdi-search"></i> Filter
+                                </button>
+                            </form>
+                        </div>
                         <a href="{{ route('transaksisurat.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
                             <i class="zmdi zmdi-plus"></i> Tambah
+                        </a>
+                        <a href="{{ route('transaksisurat.create') }}" class="au-btn au-btn-icon btn-primary au-btn--small mb-3">
+                            <i class="fa fa-download"></i> Download
                         </a>
                         <div class="table-responsive table--no-card m-b-30">
                             <table class="table table-borderless table-striped text-center">
                                 <thead class="bg-info">
                                     <tr>
-                                        <th class="text-light">No. Agenda</th>
-                                        <th class="text-light">No. Surat</th>
-                                        <th class="text-light">Pengirim</th>
-                                        <th class="text-light">Tanggal Surat</th>
-                                        <th class="text-light">Kategori</th>
-                                        <th class="text-light">Action</th>
+                                        <th class="text-light align-middle">No. Agenda</th>
+                                        <th class="text-light align-middle">No. Surat</th>
+                                        <th class="text-light align-middle">Pengirim</th>
+                                        <th class="text-light align-middle">
+                                            @if(@isset($berdasarkan))
+                                                @if($berdasarkan == 'tanggal_diterima')
+                                                    Tanggal Diterima
+                                                @elseif($berdasarkan == 'created_at')
+                                                    Tanggal Dibuat
+                                                @else 
+                                                    Tanggal Surat
+                                                @endif
+                                            @endif
+                                        </th>
+                                        <th class="text-light align-middle">Kategori</th>
+                                        <th class="text-light align-middle">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if($transaksiSurats->count() > 0)
                                         @foreach($transaksiSurats as $t)
                                             <tr>                                                
-                                                <td style="vertical-align: middle">{{ $t->no_agenda }}</td>
-                                                <td>{{ $t->no_surat }}</td>
-                                                <td>{{ $t->pengirim }}</td>
-                                                <td>{{ $t->tanggal_surat->format('d/m/Y') }}</td>
-                                                <td class="{{ request()->is($t->kategori == 'in') ? 'text-success' : 'text-danger' }}">{{ request()->is($t->kategori == 'in') ? 'Masuk' : 'Keluar' }}</td>
+                                                <td class="align-middle">{{ $t->no_agenda }}</td>
+                                                <td class="align-middle">{{ $t->no_surat }}</td>
+                                                <td class="align-middle">{{ $t->pengirim }}</td>
+                                                <td>
+                                                    @if(@isset($berdasarkan))
+                                                        @if($berdasarkan == 'tanggal_diterima')
+                                                            {{ $t->tanggal_diterima->format('d/m/Y') }}
+                                                        @elseif($berdasarkan == 'created_at')
+                                                            {{ $t->created_at->format('d/m/Y') }}
+                                                        @else 
+                                                            {{ $t->tanggal_surat->format('d/m/Y') }}
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle {{ request()->is($t->kategori == 'in') ? 'text-success' : 'text-danger' }}">{{ request()->is($t->kategori == 'in') ? 'Masuk' : 'Keluar' }}</td>
                                                 <td>
                                                     <div class="dropdown">
                                                         <button class="btn btn-info rounded-circle item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

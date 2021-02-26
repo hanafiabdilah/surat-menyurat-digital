@@ -159,4 +159,17 @@ class TransaksiSuratController extends Controller
     {
         return view('transaksi_surat.view_file', compact('file'));
     }
+
+    public function filter(Request $request)
+    {
+        $this->validate($request, [
+            'berdasarkan' => 'required',
+        ]);
+        $berdasarkan = $request->berdasarkan;
+        $kategori = $request->kategori;
+        $dari_tanggal = $request->dari_tanggal;
+        $sampai_tanggal = $request->sampai_tanggal;
+        $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->where($berdasarkan, '>=', $dari_tanggal)->where($berdasarkan, '<=', $sampai_tanggal)->orderBy($berdasarkan, 'DESC')->get();
+        return view('transaksi_surat.index', compact('transaksiSurats', 'berdasarkan', 'kategori', 'dari_tanggal', 'sampai_tanggal'));
+    }
 }
