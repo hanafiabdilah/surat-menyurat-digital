@@ -43,7 +43,7 @@ class KlasifikasiController extends Controller
             'jabatan' => 'required|min:4|max:50|regex:/^[a-zA-Z ]+$/',
         ]);
         $request['created_by'] = Auth::user()->id;
-        $request['updated_by'] = '';
+        $request['updated_by'] = Auth::user()->id;
         Klasifikasi::create($request->all());
         return redirect(route('klasifikasi.index'))->with('success', 'Klasifikasi berhasil ditambahkan');
     }

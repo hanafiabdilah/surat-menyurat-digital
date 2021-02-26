@@ -17,7 +17,7 @@ class TransaksiSuratController extends Controller
      */
     public function index()
     {
-        $transaksiSurats = TransaksiSurat::orderBy('created_at', 'DESC')->get();
+        $transaksiSurats = TransaksiSurat::orderBy('no_agenda', 'DESC')->get();
         return view('transaksi_surat.index', compact('transaksiSurats'));
     }
 
@@ -62,7 +62,7 @@ class TransaksiSuratController extends Controller
                     $request['file'] = $namaFile;
                 }
                 $request['created_by'] = Auth::user()->id;
-                $request['updated_by'] = '';
+                $request['updated_by'] = Auth::user()->id;
                 TransaksiSurat::create($request->all());
                 return redirect(route('transaksisurat.index'))->with('success', 'Surat berhasil ditambahkan');
             }
@@ -158,5 +158,38 @@ class TransaksiSuratController extends Controller
     public function viewFile($file)
     {
         return view('transaksi_surat.view_file', compact('file'));
+    }
+
+    public function filter(Request $request)
+    {
+        $berdasarkan = $request->berdasarkan;
+        $kategori = $request->kategori;
+        $dari_tanggal = $request->dari_tanggal;
+        $sampai_tanggal = $request->sampai_tanggal;
+        if ($dari_tanggal) {
+            if ($sampai_tanggal) {
+                if ($berdasarkan) {
+                    $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->whereDate($berdasarkan, '>=', $dari_tanggal)->whereDate($berdasarkan, '<=', $sampai_tanggal)->orderBy($berdasarkan, 'DESC')->get();
+                }
+                $this->validate($request, [
+                    'berdasarkan' => 'required',
+                ]);
+            }
+            $this->validate($request, [
+                'sampai_tanggal' => 'required',
+                'berdasarkan' => 'required',
+            ]);
+        } elseif ($sampai_tanggal) {
+            $this->validate($request, [
+                'dari_tanggal' => 'required',
+                'berdasarkan' => 'required',
+            ]);
+            $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->orderBy($berdasarkan, 'DESC')->get();
+        } else {
+            $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->orderBy('no_agenda', 'DESC')->get();
+        }
+
+
+        return view('transaksi_surat.index', compact('transaksiSurats', 'berdasarkan', 'kategori', 'dari_tanggal', 'sampai_tanggal'));
     }
 }

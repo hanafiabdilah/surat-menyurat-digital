@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\TransaksiSurat;
 use App\Klasifikasi;
 use App\SifatSurat;
@@ -49,6 +50,8 @@ class DisposisiController extends Controller
             'batas_waktu' => 'required',
             'catatan' => 'max:255',
         ]);
+        $request['created_by'] = Auth::user()->id;
+        $request['updated_by'] = Auth::user()->id;
         $request['id_transaksi_surat'] = $id_surat;
         Disposisi::create($request->all());
         return redirect(route('disposisi.index', $id_surat))->with('success', 'Disposisi berhasil ditambahkan');
@@ -96,6 +99,7 @@ class DisposisiController extends Controller
             'catatan' => 'max:255',
         ]);
         $disposisi = Disposisi::find($id);
+        $request['updated_by'] = Auth::user()->id;
         $disposisi->update($request->all());
         return back()->with('success', 'Disposisi berhasil diupdate');
     }

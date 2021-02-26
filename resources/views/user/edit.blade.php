@@ -70,6 +70,38 @@
                                     @enderror                         
                                 </div>
                             </div>    
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label>Dibuat Oleh</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input class="form-control" value="{{ $user->createdBy->username ?? 'User sudah dihapus' }}" disabled>
+                                </div>
+                            </div> 
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label>Dibuat Pada</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input class="form-control" value="{{ $user->created_at->format('d-M-Y H:i') }}" disabled>
+                                </div>
+                            </div> 
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label>Terakhir diupdate oleh</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input class="form-control" value="{{ $user->updatedBy->username ?? 'User sudah dihapus' }}" disabled>
+                                </div>
+                            </div> 
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label>Terakhir diupdate pada</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input class="form-control" value="{{ $user->updated_at->format('d-M-Y H:i') }}" disabled>
+                                </div>
+                            </div> 
                         </div>
                         <div class="au-card-footer">
                             <button ty[e="submit" class="btn btn-primary">

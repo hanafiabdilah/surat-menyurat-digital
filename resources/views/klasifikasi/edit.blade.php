@@ -41,6 +41,22 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
+                                    <label>Dibuat oleh</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input class="form-control" value="{{ $klasifikasi->createdBy->username ?? 'User sudah dihapus' }}" disabled>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label>Dibuat pada</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input class="form-control" value="{{ $klasifikasi->created_at->format('d-M-Y H:i') }}" disabled>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
                                     <label>Terakhir diupdate oleh</label>
                                 </div>
                                 <div class="col-12 col-md-9">
