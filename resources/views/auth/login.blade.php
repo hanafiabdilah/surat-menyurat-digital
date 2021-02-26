@@ -39,9 +39,7 @@
                 <div class="login-wrap">
                     <div class="login-content">
                         <div class="login-logo">
-                            <a href="#">
-                                <img src="images/icon/logo.png" alt="CoolAdmin">
-                            </a>
+                            <h3 class="title-2">PENGELOLA SURAT</h3>
                         </div>
                         <div class="login-form">
                             <form action="{{ route('login') }}" method="post">

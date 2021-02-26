@@ -136,11 +136,13 @@
                             </div>
                         </div>
                     </div>
+                    @if(Auth::user()->role == 'staff')
                     <div class="au-card-footer">
                         <a href="{{ route('transaksisurat.edit', $transaksiSurat->id) }}" class="btn btn-primary btn-sm">
                             <i class="fa fa-pencil-square-o"></i> Edit
                         </a>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

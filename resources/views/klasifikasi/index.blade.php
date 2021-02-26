@@ -11,9 +11,11 @@
                         <h3 class="title-3">Klasifikasi</h3>
                     </div>
                     <div class="au-card-body mt-3 mb-3">
+                        @if(Auth::user()->role == 'admin')
                         <a href="{{ route('klasifikasi.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
                             <i class="zmdi zmdi-plus"></i> Tambah
                         </a>
+                        @endif
                         <div class="table-responsive table--no-card m-b-30">
                             <table class="table table-borderless table-striped text-center">
                                 <thead class="bg-info">
@@ -21,7 +23,9 @@
                                         <th class="text-light">No</th>
                                         <th class="text-light">Nama</th>
                                         <th class="text-light">Jabatan</th>
+                                        @if(Auth::user()->role == 'admin')
                                         <th class="text-light">Action</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -31,6 +35,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $k->nama }}</td>
                                                 <td>{{ $k->jabatan }}</td>
+                                                @if(Auth::user()->role == 'admin')
                                                 <td>
                                                     <div class="dropdown">
                                                         <button class="btn btn-info rounded-circle item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -46,6 +51,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     @else

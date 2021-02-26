@@ -22,23 +22,51 @@
                                     <label for="sifat_surat" class=" form-control-label">Sifat Surat</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <select id="sifat_surat" name="sifat_surat" class="form-control @error('sifat_surat') is-invalid @enderror">
-                                        <option value="{{ $sifatSurat->sifat_surat}}">{{ $sifatSurat->sifat_surat}}</option>
-                                        <option value="Surat Dinas">Surat Dinas</option>
-                                        <option value="Surat Rahasia">Surat Niaga</option>                                        
-                                        <option value="Surat Pribadi">Surat Sosial</option>                                        
-                                        <option value="Surat Biasa">Surat Pengantar</option>                                        
-                                    </select>
+                                    <input id="sifat_surat" name="sifat_surat" value="{{ $sifatSurat->sifat_surat }}" class="form-control @error('sifat_surat') is-invalid @enderror">
                                     @error('sifat_surat')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label>Dibuat oleh</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input class="form-control" value="{{ $sifatSurat->createdBy->username ?? 'User sudah dihapus' }}" disabled>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label>Dibuat pada</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input class="form-control" value="{{ $sifatSurat->created_at->format('d-M-Y H:i') }}" disabled>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label>Terakhir diupdate oleh</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input class="form-control" value="{{ $sifatSurat->updatedBy->username ?? 'User sudah dihapus' }}" disabled>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label>Terakhir diupdate pada</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input class="form-control" value="{{ $sifatSurat->updated_at->format('d-M-Y H:i') }}" disabled>
+                                </div>
+                            </div>
                         </div>
                         <div class="au-card-footer">
+                            @if(Auth::user()->role == 'admin')
                             <button type="submit" class="btn btn-primary btn-sm">
                                 <i class="fa fa-upload"></i> Update
                             </button>
+                            @endif
                         </div>
                     </form>
                 </div>

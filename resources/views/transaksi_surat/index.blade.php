@@ -54,9 +54,11 @@
                                 </button>
                             </form>
                         </div>
-                        <a href="{{ route('transaksisurat.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
-                            <i class="zmdi zmdi-plus"></i> Tambah
-                        </a>
+                        @if(Auth::user()->role == 'staff')
+                            <a href="{{ route('transaksisurat.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
+                                <i class="zmdi zmdi-plus"></i> Tambah
+                            </a>
+                        @endif
                         <a href="{{ route('transaksisurat.create') }}" class="au-btn au-btn-icon btn-primary au-btn--small mb-3">
                             <i class="fa fa-download"></i> Download
                         </a>
@@ -109,12 +111,14 @@
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                             <a class="dropdown-item" href="{{ route('disposisi.index', $t->id) }}">Disposisi</a>
                                                             <a class="dropdown-item" href="{{ route('transaksisurat.show', $t->id) }}">Detail</a>
+                                                            @if(Auth::user()->role == 'staff')
                                                             <a class="dropdown-item" href="{{ route('transaksisurat.edit', $t->id) }}">Edit</a>
                                                             <form action="{{ route('transaksisurat.destroy', $t->id ) }}" method="post">
                                                                 @csrf
                                                                 <input name="_method" type="hidden" value="DELETE">
                                                                 <button type="submit" class="dropdown-item">Hapus</button>
                                                             </form>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </td>

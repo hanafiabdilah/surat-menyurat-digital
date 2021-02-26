@@ -69,9 +69,11 @@
                             </div> 
                         </div>
                     </div>
+                    @if(Auth::user()->role == 'staff')
                     <a href="{{ route('disposisi.create', $id_surat) }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
                         <i class="zmdi zmdi-plus"></i> Tambah
                     </a>
+                    @endif
                     <div class="table-responsive table--no-card m-b-30">
                         <table class="table table-borderless table-striped text-center">
                             <thead class="bg-info">

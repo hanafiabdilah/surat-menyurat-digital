@@ -21,13 +21,7 @@
                                     <label for="sifat_surat" class=" form-control-label">Sifat Surat</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <select id="sifat_surat" name="sifat_surat" class="form-control @error('sifat_surat') is-invalid @enderror">
-                                        <option value="">Pilih Role</option>
-                                        <option value="Surat Dinas">Surat Dinas</option>
-                                        <option value="Surat Rahasia">Surat Niaga</option>                                        
-                                        <option value="Surat Pribadi">Surat Sosial</option>                                        
-                                        <option value="Surat Biasa">Surat Pengantar</option>                                        
-                                    </select>
+                                    <input id="sifat_surat" name="sifat_surat" class="form-control @error('sifat_surat') is-invalid @enderror">
                                     @error('sifat_surat')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
