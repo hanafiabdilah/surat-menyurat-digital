@@ -15,6 +15,14 @@
                             <form action="{{ route('filter') }}" method="get">
                                 <div class="row">
                                     <div class="col-md-3">
+                                        <label for="kategori">Kategori</label>
+                                        <select id="kategori" name="kategori" class="form-control">
+                                            <option value="" @isset($kategori) @if($kategori == '') selected @endif @endisset>Semua Surat</option>
+                                            <option value="in" @isset($kategori) @if($kategori == 'in') selected @endif @endisset>Surat Masuk</option>
+                                            <option value="out" @isset($kategori) @if($kategori == 'out') selected @endif @endisset>Surat Keluar</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
                                         <label for="tanggal">Berdasarkan Tanggal</label>
                                         <select id="tanggal" name="berdasarkan" class="form-control">
                                             <option value="">Pilih Berdasarkan</option>
@@ -27,20 +35,18 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="kategori">Kategori</label>
-                                        <select id="kategori" name="kategori" class="form-control">
-                                            <option value="" @isset($kategori) @if($kategori == '') selected @endif @endisset>Semua Surat</option>
-                                            <option value="in" @isset($kategori) @if($kategori == 'in') selected @endif @endisset>Surat Masuk</option>
-                                            <option value="out" @isset($kategori) @if($kategori == 'out') selected @endif @endisset>Surat Keluar</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
                                         <label for="dari_tanggal">Dari Tanggal</label>
                                         <input id="dari_tanggal" type="date" name="dari_tanggal" class="form-control" @isset($dari_tanggal) value="{{ $dari_tanggal }}" @endisset>
+                                        @error('dari_tanggal')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                     <div class="col-md-3">
                                         <label for="sampai_tanggal">Sampai Tanggal</label>
                                         <input id="sampai_tanggal" type="date" name="sampai_tanggal" class="form-control" @isset($dari_tanggal) value="{{ $sampai_tanggal }}" @endisset>
+                                        @error('sampai_tanggal')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
                                 <button class="au-btn au-btn-icon btn-primary au-btn--small mt-2">

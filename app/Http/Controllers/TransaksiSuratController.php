@@ -17,7 +17,7 @@ class TransaksiSuratController extends Controller
      */
     public function index()
     {
-        $transaksiSurats = TransaksiSurat::orderBy('created_at', 'DESC')->get();
+        $transaksiSurats = TransaksiSurat::orderBy('no_agenda', 'DESC')->get();
         return view('transaksi_surat.index', compact('transaksiSurats'));
     }
 
@@ -162,14 +162,34 @@ class TransaksiSuratController extends Controller
 
     public function filter(Request $request)
     {
-        $this->validate($request, [
-            'berdasarkan' => 'required',
-        ]);
         $berdasarkan = $request->berdasarkan;
         $kategori = $request->kategori;
         $dari_tanggal = $request->dari_tanggal;
         $sampai_tanggal = $request->sampai_tanggal;
-        $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->where($berdasarkan, '>=', $dari_tanggal)->where($berdasarkan, '<=', $sampai_tanggal)->orderBy($berdasarkan, 'DESC')->get();
+        if ($dari_tanggal) {
+            if ($sampai_tanggal) {
+                if ($berdasarkan) {
+                    $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->whereDate($berdasarkan, '>=', $dari_tanggal)->whereDate($berdasarkan, '<=', $sampai_tanggal)->orderBy($berdasarkan, 'DESC')->get();
+                }
+                $this->validate($request, [
+                    'berdasarkan' => 'required',
+                ]);
+            }
+            $this->validate($request, [
+                'sampai_tanggal' => 'required',
+                'berdasarkan' => 'required',
+            ]);
+        } elseif ($sampai_tanggal) {
+            $this->validate($request, [
+                'dari_tanggal' => 'required',
+                'berdasarkan' => 'required',
+            ]);
+            $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->orderBy($berdasarkan, 'DESC')->get();
+        } else {
+            $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->get();
+        }
+
+
         return view('transaksi_surat.index', compact('transaksiSurats', 'berdasarkan', 'kategori', 'dari_tanggal', 'sampai_tanggal'));
     }
 }
