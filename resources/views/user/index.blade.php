@@ -13,7 +13,7 @@
                     <div class="au-card-body mt-3 mb-3">                         
                         <div class="table-data__tool">
                                 <div class="table-data__tool-left">                                            
-                                    <a href="{{ route('user.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
+                                    <a href="{{ route('user.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
                                         <i class="zmdi zmdi-plus"></i> Tambah
                                     </a>                                        
                                 </div>

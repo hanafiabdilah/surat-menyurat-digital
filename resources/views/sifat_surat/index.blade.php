@@ -10,12 +10,11 @@
                     <div class="au-card-header">
                         <h3 class="title-2">Sifat Surat</h3>
                     </div>
-
                     <div class="au-card-body mt-3 mb-3">                        
                         <div class="table-data__tool">
                             <div class="table-data__tool-left">                                            
                                 @if(Auth::user()->role == 'admin')
-                                <a href="{{ route('sifatsurat.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
+                                <a href="{{ route('sifatsurat.create') }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
                                     <i class="zmdi zmdi-plus"></i> Tambah
                                 </a>
                                 @endif
