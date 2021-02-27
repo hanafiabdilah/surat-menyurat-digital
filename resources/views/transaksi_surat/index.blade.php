@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                                 <button class="au-btn au-btn-icon btn-primary au-btn--small mt-2">
-                                    <i class="zmdi zmdi-search"></i> Filter
+                                    <i class="zmdi zmdi-filter-list"></i> Filter
                                 </button>
                             </form>
                         </div>

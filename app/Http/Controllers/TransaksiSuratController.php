@@ -222,10 +222,36 @@ class TransaksiSuratController extends Controller
         }
 
         $handle = fopen($filename, 'w+');
-        fputcsv($handle, array('No Agenda', 'No Surat', 'Pengirim', 'Isi Ringkas', 'Tanggal Surat', 'Tanggal Diterima', 'Keterangan', 'Kategori', 'Dibuat Pada'));
+        fputcsv(
+            $handle,
+            array(
+                'No Agenda', ';',
+                'No Surat', ';',
+                'Pengirim', ';',
+                'Isi Ringkas', ';',
+                'Tanggal Surat', ';',
+                'Tanggal Diterima', ';',
+                'Keterangan', ';',
+                'Kategori', ';',
+                'Dibuat Pada', ';',
+            )
+        );
 
         foreach ($transaksiSurat as $row) {
-            fputcsv($handle, array($row['no_agenda'], $row['no_surat'], $row['pengirim'], $row['isi_ringkas'], $row['tanggal_surat'], $row['tanggal_diterima'], $row['keterangan'], $row['kategori'], $row['created_at']));
+            fputcsv(
+                $handle,
+                array(
+                    $row['no_agenda'], ';',
+                    $row['no_surat'], ';',
+                    $row['pengirim'], ';',
+                    $row['isi_ringkas'], ';',
+                    $row['tanggal_surat'], ';',
+                    $row['tanggal_diterima'], ';',
+                    $row['keterangan'], ';',
+                    $row['kategori'], ';',
+                    $row['created_at'], ';',
+                )
+            );
         }
 
         fclose($handle);
