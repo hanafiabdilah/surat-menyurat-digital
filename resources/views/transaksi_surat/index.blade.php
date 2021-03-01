@@ -72,7 +72,7 @@
                                         <th class="text-light align-middle">
                                             @if(@isset($berdasarkan))
                                                 @if($berdasarkan == 'tanggal_diterima')
-                                                    Tanggal Diterima
+                                                    Tanggal Diterima/Dikirim
                                                 @elseif($berdasarkan == 'created_at')
                                                     Tanggal Dibuat
                                                 @else 

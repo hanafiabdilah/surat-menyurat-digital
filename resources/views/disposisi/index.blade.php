@@ -12,52 +12,50 @@
                 <div class="au-card-header">
                     <h3 class="title-2">Disposisi</h3>
                 </div>
-                <div class="au-card-body mt-3 mb-3">
-                    <div class="row">
-                        <div class="col-6">
+                <div class="au-card-body mt-3 mb-3">                    
+                        
                             <div class="row form-group">
-                                <div class="col col-md-3">
+                                <div class="col-md-3">
                                     <label class="form-control-label">No. Agenda</label>
                                 </div>
-                                <div class="col-12 col-md-9">
+                                <div class="col-md-9">
                                     <input  class="form-control" value="{{ $transaksiSurat->no_agenda }}" disabled>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3">
+                                <div class="col-md-3">
                                     <label class="form-control-label">No. Surat</label>
                                 </div>
-                                <div class="col-12 col-md-9">
+                                <div class="col-md-9">
                                     <input  class="form-control" value="{{ $transaksiSurat->no_surat }}" disabled>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3">
+                                <div class="col-md-3">
                                     <label class="form-control-label">Pengirim</label>
                                 </div>
-                                <div class="col-12 col-md-9">
+                                <div class="col-md-9">
                                     <input  class="form-control" value="{{ $transaksiSurat->pengirim }}" disabled>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
+                            </div>                          
+
                             <div class="row form-group">
-                                <div class="col col-md-3">
+                                <div class="col-md-3">
                                     <label class="form-control-label">Kategori</label>
                                 </div>
-                                <div class="col-12 col-md-9">
+                                <div class="col-md-9">
                                     @if($transaksiSurat->kategori == 'in')
                                         <input class="form-control" value="Surat Masuk" disabled>
                                     @else 
                                         <input class="form-control" value="Surat Keluar" disabled>
                                     @endif
-                                </div>
-                            </div>
+                                </div> 
+                            </div>                           
                             <div class="row form-group">
-                                <div class="col col-md-3">
+                                <div class="col-md-3">
                                     <label for="file" class=" form-control-label">File</label>
                                 </div>
-                                <div class="col-12 col-md-9">
+                                <div class="col-md-9">
                                     @if($transaksiSurat->file)
                                         <label>{{ $transaksiSurat->file }}</label> |
                                         <a href="{{ asset('storage/surat') }}/{{ $transaksiSurat->file}}" target="_blank">View</a> |
@@ -68,7 +66,7 @@
                                 </div>
                             </div> 
                         </div>
-                    </div>
+                    
                     @if(Auth::user()->role == 'staff')
                     <a href="{{ route('disposisi.create', $id_surat) }}" class="au-btn au-btn-icon au-btn--green au-btn--small mb-3">
                         <i class="zmdi zmdi-plus"></i> Tambah
