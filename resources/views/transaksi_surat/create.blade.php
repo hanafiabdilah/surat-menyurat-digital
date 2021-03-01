@@ -12,7 +12,7 @@
             <div class="au-card">
                 <div class="au-card-inner">
                     <div class="au-card-header">
-                        <h3 class="title-2">Tambah Transaksi Surat</h3>
+                        <h3 class="title-2">Tambah Arsip Surat</h3>
                     </div>
                     <form action="{{ route('transaksisurat.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">  
                     @csrf

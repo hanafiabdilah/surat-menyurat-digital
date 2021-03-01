@@ -13,7 +13,7 @@
                 </li>
                 <li  class="{{ request()->is('transaksisurat') ? 'active' : '' }}{{ request()->is('transaksisurat/*') ? 'active' : '' }}">
                     <a  href="{{ route('transaksisurat.index') }}">
-                        <i class="zmdi zmdi-email"></i>Transaksi Surat</a>                        
+                        <i class="zmdi zmdi-email"></i>Arsip Surat</a>                        
                 </li>
                 <li class="{{ request()->is('klasifikasi') ? 'active' : '' }}{{ request()->is('klasifikasi/*') ? 'active' : '' }}">
                     <a href="{{ route('klasifikasi.index') }}">

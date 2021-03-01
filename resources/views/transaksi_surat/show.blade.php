@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Detail Transaksi Surat')
+@section('title', 'Detail Arsip Surat')
 
 @section('body')
     <div class="row">
@@ -11,7 +11,7 @@
             <div class="au-card">
                 <div class="au-card-inner">
                     <div class="au-card-header">
-                        <h3 class="title-2">Detail Transaksi Surat</h3>
+                        <h3 class="title-2">Detail Arsip Surat</h3>
                     </div>
                     <div class="au-card-body mt-3 mb-3">
                         <div class="row form-group">

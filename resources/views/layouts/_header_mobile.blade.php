@@ -22,7 +22,7 @@
                 </li>
                 <li>
                     <a href="{{ route('transaksisurat.index') }}">
-                    <i class="zmdi zmdi-email"></i>Transaksi Surat</a>
+                    <i class="zmdi zmdi-email"></i>Arsip Surat</a>
                 </li>
                 <li>
                     <a href="{{ route('klasifikasi.index') }}">
