@@ -52,6 +52,11 @@
                                 <button class="au-btn au-btn-icon btn-primary au-btn--small mt-2">
                                     <i class="zmdi zmdi-filter-list"></i> Filter
                                 </button>
+                                @if(request()->is('transaksisurat/f/*'))
+                                <a href="{{ route('transaksisurat.index') }}" class="au-btn--danger btn-danger au-btn--small mt-2">
+                                    <i class="fa fa-undo"></i> Reset Filter
+                                </a>
+                                @endif
                             </form>
                         </div>
                         @if(Auth::user()->role == 'staff')
