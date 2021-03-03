@@ -32,10 +32,16 @@
                     <a href="{{ route('sifatsurat.index') }}">
                     <i class="fa fa-book"></i>Sifat Surat</a>
                 </li>
-                <li>
-                    <a href="{{ route('user.index') }}">
-                    <i class="fa fa-users"></i>User</a>
-                </li>
+                @if(Auth::user()->role == 'admin')
+                    <li>
+                        <a href="{{ route('user.index') }}">
+                        <i class="fa fa-users"></i>User</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('logDownload.index') }}">
+                        <i class="fa fa-download"></i>Download</a>
+                    </li>
+                @endif
             </ul>
         </div>
     </nav>

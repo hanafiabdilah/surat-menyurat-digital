@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use App\TransaksiSurat;
 use App\Disposisi;
+use App\LogDownload;
 use File;
 
 class TransaksiSuratController extends Controller
@@ -215,10 +216,10 @@ class TransaksiSuratController extends Controller
 
         if ($berdasarkan) {
             $transaksiSurat = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->whereDate($berdasarkan, '>=', $dari_tanggal)->whereDate($berdasarkan, '<=', $sampai_tanggal)->orderBy($berdasarkan, 'DESC')->get();
-            $filename = __("TransaksiSurat dari :dariTanggal sampai :sampaiTanggal berdasarkan :berdasarkan.csv", ['dariTanggal' => $dari_tanggal, 'sampaiTanggal' => $sampai_tanggal, 'berdasarkan' => $berdasarkan]);
+            $filename = __(":kode Arsip Surat dari :dariTanggal sampai :sampaiTanggal berdasarkan :berdasarkan.csv", ['kode' => time(), 'dariTanggal' => $dari_tanggal, 'sampaiTanggal' => $sampai_tanggal, 'berdasarkan' => $berdasarkan]);
         } else {
             $transaksiSurat = TransaksiSurat::orderBy('no_agenda', 'DESC')->get();
-            $filename = "TransaksiSuratAll.csv";
+            $filename = __(":kode ArsipSuratAll.csv", ['kode' => time()]);
         }
 
         $handle = fopen($filename, 'w+');
@@ -259,6 +260,11 @@ class TransaksiSuratController extends Controller
         $headers = array(
             'Content-Type' => 'text/csv',
         );
+
+        $logDownload = new LogDownload();
+        $logDownload->download_by = Auth::user()->id;
+        $logDownload->file = $filename;
+        $logDownload->save();
 
         return Response::download($filename, $filename, $headers);
     }

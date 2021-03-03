@@ -79,7 +79,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="tanggal_diterima" class=" form-control-label">Tanggal Diterima</label>
+                                    <label for="tanggal_diterima" class=" form-control-label">Tanggal Diterima/Dikirim</label>
                                 </div>
                                 <div id="tanggal_diterima" class="col-12 col-md-9">
                                     <input type="date" name="tanggal_diterima" class="form-control @error('tanggal_diterima') is-invalid @enderror" value="{{ $transaksiSurat->tanggal_diterima->format('Y-m-d') }}">

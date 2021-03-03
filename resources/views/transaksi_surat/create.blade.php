@@ -79,7 +79,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="tanggal_diterima" class=" form-control-label">Tanggal Diterima/Diterima</label>
+                                    <label for="tanggal_diterima" class=" form-control-label">Tanggal Diterima/Dikirim</label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <input id="tanggal_diterima" type="date" name="tanggal_diterima" class="form-control @error('tanggal_diterima') is-invalid @enderror" value="{{ Request::old('tanggal_surat') }}">

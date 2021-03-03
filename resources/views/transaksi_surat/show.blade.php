@@ -61,7 +61,7 @@
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-3">
-                                <label for="text-input" class=" form-control-label">Tanggal Diterima</label>
+                                <label for="text-input" class=" form-control-label">Tanggal Diterima/Dikirim</label>
                             </div>
                             <div class="col-12 col-md-9">
                                 <input type="date" name="tanggal_diterima" class="form-control" value="{{ $transaksiSurat->tanggal_diterima->format('Y-m-d') }}" disabled>

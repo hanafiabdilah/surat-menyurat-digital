@@ -27,6 +27,10 @@
                 <li class="{{ request()->is('user') ? 'active' : '' }}{{ request()->is('user/*') ? 'active' : '' }}">
                     <a href="{{ route('user.index') }}">
                     <i class="fa fa-users"></i>User</a>
+                </li>
+                <li class="{{ request()->is('logdownload') ? 'active' : '' }}">
+                    <a href="{{ route('logDownload.index') }}">
+                    <i class="fa fa-download"></i>Log Download</a>
                 </li>                                
                 @endif
 

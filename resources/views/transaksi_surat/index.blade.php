@@ -63,10 +63,10 @@
                             <i class="fa fa-download"></i> Download
                         </a>
                         <div class="table-responsive table--no-card m-b-30">
-                            <table class="table table-borderless table-striped text-center">
+                            <table class="table table-borderless table-striped">
                                 <thead class="bg-info">
                                     <tr>
-                                        <th class="text-light align-middle">No. Agenda</th>
+                                        <th class="text-light align-middle text-center">No. Agenda</th>
                                         <th class="text-light align-middle">No. Surat</th>
                                         <th class="text-light align-middle">Pengirim</th>
                                         <th class="text-light align-middle">
@@ -88,7 +88,7 @@
                                     @if($transaksiSurats->count() > 0)
                                         @foreach($transaksiSurats as $t)
                                             <tr>                                                
-                                                <td class="align-middle">{{ $t->no_agenda }}</td>
+                                                <td class="align-middle text-center">{{ $t->no_agenda }}</td>
                                                 <td class="align-middle">{{ $t->no_surat }}</td>
                                                 <td class="align-middle">{{ $t->pengirim }}</td>
                                                 <td>

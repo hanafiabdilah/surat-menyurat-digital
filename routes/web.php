@@ -37,9 +37,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('user', 'UserController');
         Route::resource('klasifikasi', 'KlasifikasiController');
         Route::resource('sifatsurat', 'SifatSuratController');
+        Route::get('logdownload', 'LogDownloadController@index')->name('logDownload.index');
+        Route::delete('logdownload/{id}', 'LogDownloadController@destroy')->name('logDownload.destroy');
     });
 
-    Route::get('transaksisurat/f/filter', 'TransaksiSuratController@filter')->name('filter');    
+    Route::get('transaksisurat/f/filter', 'TransaksiSuratController@filter')->name('filter');
     Route::get('user/f/filter', 'userController@filter')->name('filter_user');
     Route::get('sifatsurat/f/filter', 'SifatSuratController@filter')->name('filter_surat');
 
@@ -51,6 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('transaksisurat/download/{file}', 'TransaksiSuratController@downloadFile')->name('downloadFile');
     Route::get('transaksisurat/f/filter', 'TransaksiSuratController@filter')->name('filter');
     Route::get('transaksisurat/d/download', 'TransaksiSuratController@download')->name('download');
+
 
     //Logout
     Route::get('logout', 'AuthController@logout')->name('logout');
