@@ -27,7 +27,7 @@
                                         <select id="tanggal" name="berdasarkan" class="form-control">
                                             <option value="">Pilih Berdasarkan</option>
                                             <option value="tanggal_surat" @isset($berdasarkan) @if($berdasarkan == 'tanggal_surat') selected @endif @endisset>Tanggal Surat</option>
-                                            <option value="tanggal_diterima" @isset($berdasarkan) @if($berdasarkan == 'tanggal_diterima') selected @endif @endisset>Tanggal Diterima</option>
+                                            <option value="tanggal_diterima" @isset($berdasarkan) @if($berdasarkan == 'tanggal_diterima') selected @endif @endisset>Tanggal Diterima/Dikirim</option>
                                             <option value="created_at" @isset($berdasarkan) @if($berdasarkan == 'created_at') selected @endif @endisset>Tanggal Dibuat</option>
                                         </select>
                                         @error('berdasarkan')
@@ -130,7 +130,7 @@
                                             </tr>                          
                                         @endforeach
                                     @else
-                                        <tr>
+                                        <tr class="text-center">
                                             <td colspan="6">Data tidak ditemukan</td>                                           
                                         </tr>
                                     @endif                                                                                 
