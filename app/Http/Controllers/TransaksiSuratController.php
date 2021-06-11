@@ -19,7 +19,7 @@ class TransaksiSuratController extends Controller
      */
     public function index()
     {
-        $transaksiSurats = TransaksiSurat::orderBy('no_agenda', 'DESC')->get();
+        $transaksiSurats = TransaksiSurat::orderBy('id', 'DESC')->get();
         return view('transaksi_surat.index', compact('transaksiSurats'));
     }
 
@@ -32,6 +32,10 @@ class TransaksiSuratController extends Controller
     {
         return view('transaksi_surat.create');
     }
+    public function createOut()
+    {
+        return view('transaksi_surat.create_out');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -41,36 +45,46 @@ class TransaksiSuratController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'no_agenda' => 'required|max:50',
-            'no_surat' => 'required|max:50',
-            'pengirim' => 'required|max:70|regex:/^[a-zA-Z .]+$/',
-            'isi_ringkas' => 'required|max:255',
-            'tanggal_surat' => 'required',
-            'tanggal_diterima' => 'required',
-            'kategori' => 'required',
-            'keterangan' => 'max:255',
-            'upload' => 'max:2048',
-        ]);
-
-        $cekNoAgenda = TransaksiSurat::where('no_agenda', $request->no_agenda)->count();
-        $cekNoSurat = TransaksiSurat::where('no_surat', $request->no_surat)->count();
-        if ($cekNoAgenda < 1) {
-            if ($cekNoSurat < 1) {
-                if ($request->file('upload')) {
-                    $file = $request->file('upload');
-                    $namaFile = time() . '.' . $file->extension();
-                    $file->move(storage_path('app/public/surat'), $namaFile);
-                    $request['file'] = $namaFile;
-                }
-                $request['created_by'] = Auth::user()->id;
-                $request['updated_by'] = Auth::user()->id;
-                TransaksiSurat::create($request->all());
-                return redirect(route('transaksisurat.index'))->with('success', 'Surat berhasil ditambahkan');
-            }
-            return back()->with('error', 'No surat sudah ada')->withInput();
+        if ($request->kategori == 'in') {
+            $this->validate($request, [
+                'no_surat' => 'required|max:50',
+                'pengirim' => 'required|max:70|regex:/^[a-zA-Z .]+$/',
+                'isi_ringkas' => 'required|max:255',
+                'tanggal_surat' => 'required',
+                'tanggal_diterima' => 'required',
+                'keterangan' => 'max:255',
+                'upload' => 'max:2048',
+            ]);
+        } else {
+            $this->validate($request, [
+                'no_surat' => 'required|max:50',
+                'isi_ringkas' => 'required|max:255',
+                'tanggal_surat' => 'required',
+                'tanggal_diterima' => 'required',
+                'keterangan' => 'max:255',
+                'upload' => 'max:2048',
+            ]);
         }
-        return back()->with('error', 'No agenda sudah ada')->withInput();
+
+
+        // $cekNoAgenda = TransaksiSurat::where('no_agenda', $request->no_agenda)->count();
+        $cekNoSurat = TransaksiSurat::where('no_surat', $request->no_surat)->count();
+        // if ($cekNoAgenda < 1) {
+        if ($cekNoSurat < 1) {
+            if ($request->file('upload')) {
+                $file = $request->file('upload');
+                $namaFile = time() . '.' . $file->extension();
+                $file->move(storage_path('app/public/surat'), $namaFile);
+                $request['file'] = $namaFile;
+            }
+            $request['created_by'] = Auth::user()->id;
+            $request['updated_by'] = Auth::user()->id;
+            TransaksiSurat::create($request->all());
+            return redirect(route('transaksisurat.index'))->with('success', 'Surat berhasil ditambahkan');
+        }
+        return back()->with('error', 'No surat sudah ada')->withInput();
+        // }
+        // return back()->with('error', 'No agenda sudah ada')->withInput();
     }
 
     /**
@@ -107,7 +121,7 @@ class TransaksiSuratController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'no_agenda' => 'required|max:50',
+            // 'no_agenda' => 'required|max:50',
             'no_surat' => 'required|max:50',
             'pengirim' => 'required|max:70|regex:/^[a-zA-Z .]+$/',
             'isi_ringkas' => 'required|max:255',
@@ -118,25 +132,25 @@ class TransaksiSuratController extends Controller
         ]);
 
         $transaksiSurat = TransaksiSurat::find($id);
-        $cekNoAgenda = TransaksiSurat::where('no_agenda', $request->no_agenda)->where('no_agenda', '!=', $transaksiSurat->no_agenda)->count();
+        // $cekNoAgenda = TransaksiSurat::where('no_agenda', $request->no_agenda)->where('no_agenda', '!=', $transaksiSurat->no_agenda)->count();
         $cekNoSurat = TransaksiSurat::where('no_surat', $request->no_surat)->where('no_surat', '!=', $transaksiSurat->no_surat)->count();
-        if ($cekNoAgenda < 1) {
-            if ($cekNoSurat < 1) {
-                if ($request->file('upload')) {
-                    $file = $request->file('upload');
-                    $namaFile = time() . '.' . $file->extension();
-                    $oldFile = storage_path(__('app/public/surat/:namafile', ['namafile' => $transaksiSurat->file]));
-                    $file->move(storage_path('app/public/surat'), $namaFile);
-                    File::delete($oldFile);
-                    $request['file'] = $namaFile;
-                }
-                $request['updated_by'] = Auth::user()->id;
-                $transaksiSurat->update($request->all());
-                return redirect(route('transaksisurat.edit', $transaksiSurat->id))->with('success', 'Surat berhasil ditambahkan');
+        // if ($cekNoAgenda < 1) {
+        if ($cekNoSurat < 1) {
+            if ($request->file('upload')) {
+                $file = $request->file('upload');
+                $namaFile = time() . '.' . $file->extension();
+                $oldFile = storage_path(__('app/public/surat/:namafile', ['namafile' => $transaksiSurat->file]));
+                $file->move(storage_path('app/public/surat'), $namaFile);
+                File::delete($oldFile);
+                $request['file'] = $namaFile;
             }
-            return back()->with('error', 'No surat sudah ada');
+            $request['updated_by'] = Auth::user()->id;
+            $transaksiSurat->update($request->all());
+            return redirect(route('transaksisurat.edit', $transaksiSurat->id))->with('success', 'Surat berhasil ditambahkan');
         }
-        return back()->with('error', 'No agenda sudah ada');
+        return back()->with('error', 'No surat sudah ada');
+        // }
+        // return back()->with('error', 'No agenda sudah ada');
     }
 
     /**
@@ -173,32 +187,41 @@ class TransaksiSuratController extends Controller
         session(["dari_tanggal" => $dari_tanggal]);
         session(["sampai_tanggal" => $sampai_tanggal]);
         if (!$berdasarkan and !$dari_tanggal and !$sampai_tanggal) {
-            $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->orderBy('no_agenda', 'DESC')->get();
+            $this->validate($request, [
+                'kategori' => 'required',
+            ]);
+            $transaksiSurats = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->orderBy('id', 'DESC')->get();
         } elseif ($berdasarkan and !$dari_tanggal and !$sampai_tanggal) {
             $this->validate($request, [
+                'kategori' => 'required',
                 'dari_tanggal' => 'required',
                 'sampai_tanggal' => 'required',
             ]);
         } elseif ($berdasarkan and $dari_tanggal and !$sampai_tanggal) {
             $this->validate($request, [
+                'kategori' => 'required',
                 'sampai_tanggal' => 'required',
             ]);
         } elseif ($berdasarkan and !$dari_tanggal and $sampai_tanggal) {
             $this->validate($request, [
+                'kategori' => 'required',
                 'dari_tanggal' => 'required',
             ]);
         } elseif (!$berdasarkan and $dari_tanggal and !$sampai_tanggal) {
             $this->validate($request, [
+                'kategori' => 'required',
                 'berdasarkan' => 'required',
                 'sampai_tanggal' => 'required',
             ]);
         } elseif (!$berdasarkan and !$dari_tanggal and $sampai_tanggal) {
             $this->validate($request, [
+                'kategori' => 'required',
                 'berdasarkan' => 'required',
                 'dari_tanggal' => 'required',
             ]);
         } elseif (!$berdasarkan and $dari_tanggal and $sampai_tanggal) {
             $this->validate($request, [
+                'kategori' => 'required',
                 'berdasarkan' => 'required',
             ]);
         } else {
@@ -218,7 +241,7 @@ class TransaksiSuratController extends Controller
             $transaksiSurat = TransaksiSurat::where('kategori', 'LIKE', '%' . $kategori . '%')->whereDate($berdasarkan, '>=', $dari_tanggal)->whereDate($berdasarkan, '<=', $sampai_tanggal)->orderBy($berdasarkan, 'DESC')->get();
             $filename = __(":kode Arsip Surat dari :dariTanggal sampai :sampaiTanggal berdasarkan :berdasarkan.csv", ['kode' => time(), 'dariTanggal' => $dari_tanggal, 'sampaiTanggal' => $sampai_tanggal, 'berdasarkan' => $berdasarkan]);
         } else {
-            $transaksiSurat = TransaksiSurat::orderBy('no_agenda', 'DESC')->get();
+            $transaksiSurat = TransaksiSurat::orderBy('id', 'DESC')->get();
             $filename = __(":kode ArsipSuratAll.csv", ['kode' => time()]);
         }
 
@@ -242,7 +265,7 @@ class TransaksiSuratController extends Controller
             fputcsv(
                 $handle,
                 array(
-                    $row['no_agenda'], ';',
+                    $row['id'], ';',
                     $row['no_surat'], ';',
                     $row['pengirim'], ';',
                     $row['isi_ringkas'], ';',

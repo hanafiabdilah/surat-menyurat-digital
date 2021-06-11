@@ -22,7 +22,7 @@
                                     <label for="no_agenda" class=" form-control-label">No. Agenda</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input id="no_agenda" type="number" name="no_agenda" class="form-control @error('no_agenda') is-invalid @enderror" value="{{ $transaksiSurat->no_agenda }}">
+                                    <input id="no_agenda" type="number" name="no_agenda" class="form-control @error('no_agenda') is-invalid @enderror" value="{{ $transaksiSurat->id }}" disabled>
                                     @error('no_agenda')
                                     <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -40,18 +40,19 @@
                                     @enderror
                                 </div>
                             </div>
-
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="pengirim" class=" form-control-label">Pengirim</label>
+                            @if($transaksiSurat->kategori == 'in')
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="pengirim" class=" form-control-label">Pengirim</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input id="pengirim" type="text" name="pengirim" class="form-control @error('pengirim') is-invalid @enderror" value="{{ $transaksiSurat->pengirim }}">
+                                        @error('pengirim')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
                                 </div>
-                                <div class="col-12 col-md-9">
-                                    <input id="pengirim" type="text" name="pengirim" class="form-control @error('pengirim') is-invalid @enderror" value="{{ $transaksiSurat->pengirim }}">
-                                    @error('pengirim')
-                                    <small class="form-text text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
+                            @endif
 
                             <div class="row form-group">
                                 <div class="col col-md-3">
@@ -79,7 +80,13 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="tanggal_diterima" class=" form-control-label">Tanggal Diterima/Dikirim</label>
+                                    <label for="tanggal_diterima" class=" form-control-label">
+                                        @if($transaksiSurat->kategori == 'in')
+                                            Tanggal Diterima
+                                        @else 
+                                            Tanggal Dikirim
+                                        @endif
+                                    </label>
                                 </div>
                                 <div id="tanggal_diterima" class="col-12 col-md-9">
                                     <input type="date" name="tanggal_diterima" class="form-control @error('tanggal_diterima') is-invalid @enderror" value="{{ $transaksiSurat->tanggal_diterima->format('Y-m-d') }}">

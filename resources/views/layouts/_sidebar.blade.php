@@ -15,23 +15,23 @@
                     <a  href="{{ route('transaksisurat.index') }}">
                         <i class="zmdi zmdi-email"></i>Arsip Surat</a>                        
                 </li>
-                <li class="{{ request()->is('klasifikasi') ? 'active' : '' }}{{ request()->is('klasifikasi/*') ? 'active' : '' }}">
+                {{-- <li class="{{ request()->is('klasifikasi') ? 'active' : '' }}{{ request()->is('klasifikasi/*') ? 'active' : '' }}">
                     <a href="{{ route('klasifikasi.index') }}">
                         <i class="fas fa-user"></i>Klasifikasi</a>
-                </li>
-                <li class="{{ request()->is('sifatsurat') ? 'active' : '' }}{{ request()->is('sifatsurat/*') ? 'active' : '' }}">
+                </li> --}}
+                {{-- <li class="{{ request()->is('sifatsurat') ? 'active' : '' }}{{ request()->is('sifatsurat/*') ? 'active' : '' }}">
                     <a href="{{ route('sifatsurat.index') }}">
                     <i class="fa fa-book"></i>Sifat Surat</a>
-                </li>
+                </li> --}}
                 @if(Auth::user()->role == 'admin')
                 <li class="{{ request()->is('user') ? 'active' : '' }}{{ request()->is('user/*') ? 'active' : '' }}">
                     <a href="{{ route('user.index') }}">
                     <i class="fa fa-users"></i>User</a>
                 </li>
-                <li class="{{ request()->is('logdownload') ? 'active' : '' }}">
+                {{-- <li class="{{ request()->is('logdownload') ? 'active' : '' }}">
                     <a href="{{ route('logDownload.index') }}">
                     <i class="fa fa-download"></i>Log Download</a>
-                </li>                                
+                </li>                                 --}}
                 @endif
 
             </ul>

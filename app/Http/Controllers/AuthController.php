@@ -19,7 +19,7 @@ class AuthController extends Controller
     {
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             return redirect('/dashboard')->with('success', __('Selamat datang :nama', ['nama' => ucfirst(Auth::user()->nama)]));
-        };
+        }
         return redirect('/')->with('error', 'Username dan/atau Password Salah');
     }
 

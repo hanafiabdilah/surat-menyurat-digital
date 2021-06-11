@@ -12,12 +12,12 @@
             <div class="au-card">
                 <div class="au-card-inner">
                     <div class="au-card-header">
-                        <h3 class="title-2">Tambah Arsip Surat Masuk</h3>
+                        <h3 class="title-2">Tambah Arsip Surat Keluar</h3>
                     </div>
                     <form action="{{ route('transaksisurat.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">  
                     @csrf
-                        <div class="au-card-body mt-3 mb-3">
-                            <input id="kategori" name="kategori" value="in" hidden>                                             
+                        <div class="au-card-body mt-3 mb-3">      
+                            <input id="kategori" name="kategori" value="out" hidden>                                         
                             {{-- <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="no_agenda" class=" form-control-label">No. Agenda</label>
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
 
-                            <div class="row form-group">
+                            {{-- <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="pengirim" class=" form-control-label">Pengirim</label>
                                 </div>
@@ -52,7 +52,7 @@
                                     <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="row form-group">
                                 <div class="col col-md-3">
@@ -80,7 +80,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="tanggal_diterima" class=" form-control-label">Tanggal Diterima</label>
+                                    <label for="tanggal_diterima" class=" form-control-label">Tanggal Dikirim</label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <input id="tanggal_diterima" type="date" name="tanggal_diterima" class="form-control @error('tanggal_diterima') is-invalid @enderror" value="{{ Request::old('tanggal_surat') }}">

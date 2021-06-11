@@ -52,14 +52,7 @@
                                     <label>Password</label>
                                     <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
                                 </div>        
-                                @if(session('error'))
-                                    <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
-                                        {{ ucfirst(session('error')) }}
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                @endif
+                                 
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">LOGIN</button>
                             </form>
                         </div>

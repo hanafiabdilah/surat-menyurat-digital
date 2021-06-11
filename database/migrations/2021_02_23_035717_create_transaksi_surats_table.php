@@ -15,8 +15,7 @@ class CreateTransaksiSuratsTable extends Migration
     {
         Schema::create('transaksi_surats', function (Blueprint $table) {
             $table->id();
-            $table->string('no_agenda');
-            $table->string('pengirim');
+            $table->string('pengirim')->nullable();
             $table->string('no_surat');
             $table->text('isi_ringkas');
             $table->date('tanggal_surat');

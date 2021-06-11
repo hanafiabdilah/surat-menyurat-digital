@@ -19,7 +19,7 @@
                                 <label for="text-input" class=" form-control-label">No. Agenda</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="number" name="no_agenda" class="form-control" value="{{ $transaksiSurat->no_agenda }}" disabled>
+                                <input type="number" name="no_agenda" class="form-control" value="{{ $transaksiSurat->id }}" disabled>
                             </div>
                         </div>
 
@@ -31,7 +31,7 @@
                                 <input type="text" name="no_surat" class="form-control" value="{{ $transaksiSurat->no_surat }}" disabled>
                             </div>
                         </div>
-
+                        @if($transaksiSurat->kategori == 'in')
                         <div class="row form-group">
                             <div class="col col-md-3">
                                 <label for="text-input" class=" form-control-label">Pengirim</label>
@@ -40,6 +40,7 @@
                                 <input type="text" name="pengirim" class="form-control" value="{{ $transaksiSurat->pengirim }}" disabled>
                             </div>
                         </div>
+                        @endif
 
                         <div class="row form-group">
                             <div class="col col-md-3">
@@ -61,7 +62,13 @@
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-3">
-                                <label for="text-input" class=" form-control-label">Tanggal Diterima/Dikirim</label>
+                                <label for="text-input" class=" form-control-label">
+                                    @if($transaksiSurat->kategori == 'in')
+                                        Tanggal Diterima
+                                    @else
+                                        Tanggal Dikirim
+                                    @endif
+                                </label>
                             </div>
                             <div class="col-12 col-md-9">
                                 <input type="date" name="tanggal_diterima" class="form-control" value="{{ $transaksiSurat->tanggal_diterima->format('Y-m-d') }}" disabled>

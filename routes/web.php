@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/password', 'AccountController@updatePassword')->name('password.update');
 
     Route::group(['middleware' => ['role:staff']], function () {
+        Route::get('transaksisurat/create_out', 'TransaksiSuratController@createOut')->name('createOut');
         Route::resource('transaksisurat', 'TransaksiSuratController');
         Route::resource('transaksisurat/{id_surat}/disposisi', 'DisposisiController');
     });
