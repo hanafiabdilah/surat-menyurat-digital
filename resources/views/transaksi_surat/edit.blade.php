@@ -56,7 +56,7 @@
 
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="isi_ringkas" class=" form-control-label">Isi Ringkas</label>
+                                    <label for="isi_ringkas" class=" form-control-label">Perihal</label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <textarea id="isi_ringkas" name="isi_ringkas" rows="7" class="form-control @error('isi_ringkas') is-invalid @enderror">{{ $transaksiSurat->isi_ringkas }}</textarea>

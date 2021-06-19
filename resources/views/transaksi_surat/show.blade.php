@@ -44,7 +44,7 @@
 
                         <div class="row form-group">
                             <div class="col col-md-3">
-                                <label for="textarea-input" class=" form-control-label">Isi Ringkas</label>
+                                <label for="textarea-input" class=" form-control-label">Perihal</label>
                             </div>
                             <div class="col-12 col-md-9">
                                 <textarea name="isi_ringkas" rows="7" class="form-control" disabled>{{ $transaksiSurat->isi_ringkas }}</textarea>
